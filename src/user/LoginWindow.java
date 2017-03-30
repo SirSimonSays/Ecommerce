@@ -1,3 +1,4 @@
+package user;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,8 +6,16 @@ import javax.swing.*;
 
 public class LoginWindow {
 
+
+	/**
+	 * @var TAG
+	 * Tag univoco utilizzato per identificare questa schermata
+	 */
+	public static final String TAG = "login";
+	
 	private JFrame loginFrame;
 	private JPanel loginPanel;
+	private GroupLayout gl;
 	private JLabel nameLabel, pswLabel;
 	private JTextField nameTxt;
 	private JPasswordField pswTxt;
@@ -15,12 +24,14 @@ public class LoginWindow {
 	private Utente[] arrayUtenti = new Utente[2];
 	private int contaProve;
 	
-	/**costruttore che definisce e setta tutti gli oggetti della finestra*/
+	/**
+	 * costruttore che definisce e setta tutti gli oggetti della finestra
+	 */
 	public LoginWindow() {
 		
 		/**definizione di una "base di dati" di utenti e relativi attributi*/		
-		Admin admin1 = new Admin(1,"simone","simone@gmail.com","ciao");
-		User user1 = new User(2,"carlo","carlo@libero.it","mamma");
+		Admin admin1 = new Admin("simone","simone@gmail.com","ciao");
+		User user1 = new User("carlo","carlo@libero.it","mamma");
 		arrayUtenti[0] = admin1; 
 		arrayUtenti[1] = user1;
 			
@@ -29,8 +40,15 @@ public class LoginWindow {
 		loginFrame = new JFrame("Login");
 		loginFrame.setBounds(1270/2 - 100, 650/2 - 100, 250, 250);
 		loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
 		loginPanel = new JPanel();
 		loginPanel.setBackground(Color.white);
+		loginPanel.setLayout(gl);
+	    loginPanel.setBorder(BorderFactory.createEmptyBorder(1270/2 - 100, 650/2 - 100, 250, 250));
+
+		gl = new GroupLayout(loginPanel);
+		gl.setAutoCreateGaps(true);
+		gl.setAutoCreateContainerGaps(true);
 		
 		nameLabel = new JLabel("Username: ");
 		nameTxt = new JTextField(15); 
@@ -54,10 +72,39 @@ public class LoginWindow {
 		loginPanel.add(pswLabel);
 		loginPanel.add(pswTxt);
 		loginPanel.add(okButton);
+		
+		gl.setHorizontalGroup(
+				gl.createSequentialGroup()
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(nameLabel)
+							.addComponent(pswLabel)
+							)
+					.addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(nameTxt)
+							.addComponent(pswTxt)
+							)
+		);
+		gl.setVerticalGroup(
+				gl.createSequentialGroup()
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(nameLabel)
+							.addComponent(nameTxt)
+							)
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(pswLabel)
+							.addComponent(pswTxt)
+							)
+							.addComponent(okButton)
+		);
+		
 		loginFrame.setVisible(true);
 	}
 	
-	/**controllo delle stringhe immesse con i dati nel "database" se true => controlla se
+	/**
+	 * controllo delle stringhe immesse con i dati nel "database" se true => controlla se
 	 * l'utente riconosciuto è admin o user e lancia una nuova finestra in base ai generics, 
 	 * altrimenti da errore e lascia riprovare l'immissione dei dati. I tentativi sono
 	 * limitati a un massimo di 5 in modo da ridurre la probabilità di un intrusione.

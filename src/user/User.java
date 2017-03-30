@@ -1,11 +1,13 @@
+package user;
+
 
 public class User extends Utente {
 
 	private String indirizzoSpedizione;
 	private int phoneNumber;
 		
-	public User(int id, String nome, String email, String password) {
-		super(id, nome, email, password, false);
+	public User(String nome, String email, String password) {
+		super(nome, email, password, false);
 		// TODO Auto-generated constructor stub
 		indirizzoSpedizione = null;
 		phoneNumber = 0;

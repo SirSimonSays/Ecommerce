@@ -1,3 +1,4 @@
+package prodotto;
 
 public interface Operazioni {
 	

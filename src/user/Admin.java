@@ -1,8 +1,9 @@
+package user;
 
 public class Admin extends Utente{
 	
-	public Admin(int id, String nome, String email, String password){
-		super(id, nome, email, password, true);
+	public Admin(String nome, String email, String password){
+		super(nome, email, password, true);
 		// TODO Auto-generated constructor stub
 	}
 
