@@ -36,10 +36,10 @@ public class LoginWindow {
 		
 		loginPanel = new JPanel();
 		loginPanel.setBackground(Color.white);
-		loginPanel.setLayout(gl);
-	    loginPanel.setBorder(BorderFactory.createEmptyBorder(1270/2 - 100, 650/2 - 100, 250, 250));
-
+		loginPanel.setBorder(BorderFactory.createEmptyBorder(1270/2 - 100, 650/2 - 100, 250, 250));
+		
 		gl = new GroupLayout(loginPanel);
+		loginPanel.setLayout(gl);
 		gl.setAutoCreateGaps(true);
 		gl.setAutoCreateContainerGaps(true);
 		
@@ -73,7 +73,8 @@ public class LoginWindow {
 							.addComponent(nameLabel)
 							.addComponent(pswLabel)
 							)
-					.addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addComponent(nameTxt)
 							.addComponent(pswTxt)
 							)
@@ -90,7 +91,7 @@ public class LoginWindow {
 							.addComponent(pswLabel)
 							.addComponent(pswTxt)
 							)
-							.addComponent(okButton)
+					.addComponent(okButton)
 		);
 		
 		loginFrame.setVisible(true);
