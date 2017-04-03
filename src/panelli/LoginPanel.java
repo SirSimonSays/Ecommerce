@@ -1,26 +1,30 @@
-package user;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
+package panelli;
 
-public class LoginWindow {
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import user.Admin;
+import user.User;
+import user.Utente;
+
+public class LoginPanel  extends DefaultPanel{
 	
-	private JFrame loginFrame;
-	private JPanel loginPanel;
+	public static final String TAG = "login";
+	
 	private GroupLayout gl;
 	private JLabel nameLabel, pswLabel;
 	private JTextField nameTxt;
 	private JPasswordField pswTxt;
 	private JButton okButton;
-	private ActionListener okButtonListener;
+	
 	private Utente[] arrayUtenti = new Utente[2];
 	private int contaProve;
 	
 	/**
 	 * costruttore che definisce e setta tutti gli oggetti della finestra
 	 */
-	public LoginWindow() {
+	public LoginPanel(HandlePanel handlePanel) {
+		
+		super(handlePanel);
 		
 		/**definizione di una "base di dati" di utenti e relativi attributi*/		
 		Admin admin1 = new Admin("simone","simone@gmail.com","ciao");
@@ -30,16 +34,10 @@ public class LoginWindow {
 			
 		contaProve = 0;
 		
-		loginFrame = new JFrame("Login");
-		loginFrame.setBounds(1270/2 - 100, 650/2 - 100, 250, 250);
-		loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		//this.setBorder(BorderFactory.createEmptyBorder(1270/2 - 100, 650/2 - 100, 250, 250));
 		
-		loginPanel = new JPanel();
-		loginPanel.setBackground(Color.white);
-		loginPanel.setBorder(BorderFactory.createEmptyBorder(1270/2 - 100, 650/2 - 100, 250, 250));
-		
-		gl = new GroupLayout(loginPanel);
-		loginPanel.setLayout(gl);
+		gl = new GroupLayout(this);
+		this.setLayout(gl);
 		gl.setAutoCreateGaps(true);
 		gl.setAutoCreateContainerGaps(true);
 		
@@ -51,20 +49,13 @@ public class LoginWindow {
 		pswTxt.setEditable(true);
 		
 		okButton = new JButton("Conferma");
-		okButtonListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				onOkButtonPressed(arg0);
-			}
-		};
-		okButton.addActionListener(okButtonListener);
+		okButton.addActionListener(this);
 		
-		loginFrame.add(loginPanel);
-		loginPanel.add(nameLabel);
-		loginPanel.add(nameTxt);
-		loginPanel.add(pswLabel);
-		loginPanel.add(pswTxt);
-		loginPanel.add(okButton);
+		this.add(nameLabel);
+		this.add(nameTxt);
+		this.add(pswLabel);
+		this.add(pswTxt);
+		this.add(okButton);
 		
 		gl.setHorizontalGroup(
 				gl.createSequentialGroup()
@@ -77,6 +68,7 @@ public class LoginWindow {
 							gl.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addComponent(nameTxt)
 							.addComponent(pswTxt)
+							.addComponent(okButton)
 							)
 		);
 		gl.setVerticalGroup(
@@ -94,7 +86,6 @@ public class LoginWindow {
 					.addComponent(okButton)
 		);
 		
-		loginFrame.setVisible(true);
 	}
 	
 	/**
@@ -103,7 +94,7 @@ public class LoginWindow {
 	 * altrimenti da errore e lascia riprovare l'immissione dei dati. I tentativi sono
 	 * limitati a un massimo di 5 in modo da ridurre la probabilità di un intrusione.
 	 */ 
-	public void onOkButtonPressed(ActionEvent e){ 
+	public void actionPerformed(ActionEvent e){ 
 		
 		boolean checklogin = false;
 			
@@ -112,18 +103,18 @@ public class LoginWindow {
 			pswTxt.setEditable(false);
 			nameTxt.setText("");
 			pswTxt.setText("");
-			JOptionPane.showMessageDialog(loginFrame, "Non hai più tentativi disponibili, contatta il nostro servizio clienti",
+			JOptionPane.showMessageDialog(this, "Non hai più tentativi disponibili, contatta il nostro servizio clienti",
 				    "A caccia di malintenzionati",JOptionPane.ERROR_MESSAGE);
 		}else{
 			
 			for(int i = 0; i < arrayUtenti.length; i++){
 				if(nameTxt.getText().equals(arrayUtenti[i].getNome()) && pswTxt.getPassword().equals(arrayUtenti[i].getPassword())){
 					if(arrayUtenti[i].getIsAdmin()){
-						//finestra per admin
+						handlepanel.switchPanel(AdminPanel.TAG);
 						checklogin = true;
 						System.out.println("admin");
 					}else{
-						//finestra per user
+						handlepanel.switchPanel(LoginPanel.TAG);
 						checklogin = true;
 						System.out.println("user");
 					}
@@ -133,7 +124,7 @@ public class LoginWindow {
 			if(!checklogin){
 			
 				contaProve++;
-				JOptionPane.showMessageDialog(loginFrame,"Controlla le tue credenziali, user e/o password sono errati",
+				JOptionPane.showMessageDialog(this,"Controlla le tue credenziali, user e/o password sono errati",
 						"Credenziali errate",JOptionPane.WARNING_MESSAGE);
 				nameTxt.setText("");
 				pswTxt.setText("");

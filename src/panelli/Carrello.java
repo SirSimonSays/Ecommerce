@@ -7,5 +7,10 @@ public class Carrello extends DefaultPanel {
 	 * Tag univoco utilizzato per identificare questa schermata
 	 */
 	public static final String TAG = "carrello";
+	
+	public Carrello(HandlePanel handlePanel) {
+		
+		super(handlePanel);
+	}
 
 }

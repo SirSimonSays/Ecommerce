@@ -1,4 +1,5 @@
-import user.LoginWindow;
+import panelli.HandlePanel;
+import panelli.LoginPanel;
 
 /**
  * Classe main
@@ -14,7 +15,9 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		LoginWindow logW = new LoginWindow();
+		HandlePanel mainWin = new HandlePanel();
+		mainWin.switchPanel(LoginPanel.TAG);
+		
 	}
 
 }
