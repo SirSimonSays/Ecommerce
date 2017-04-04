@@ -1,5 +1,8 @@
 package panelli;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import user.Admin;
@@ -8,9 +11,12 @@ import user.Utente;
 
 public class LoginPanel  extends DefaultPanel{
 	
+	/**
+	 * @var TAG
+	 * Tag univoco utilizzato per identificare questa schermata  
+	 */
 	public static final String TAG = "login";
-	
-	private GroupLayout gl;
+
 	private JLabel nameLabel, pswLabel;
 	private JTextField nameTxt;
 	private JPasswordField pswTxt;
@@ -20,7 +26,9 @@ public class LoginPanel  extends DefaultPanel{
 	private int contaProve;
 	
 	/**
-	 * costruttore che definisce e setta tutti gli oggetti della finestra
+	 * Costruttore
+	 * @param handlePanel
+	 * Costruttore che definisce e setta tutti gli oggetti della finestra
 	 */
 	public LoginPanel(HandlePanel handlePanel) {
 		
@@ -34,13 +42,32 @@ public class LoginPanel  extends DefaultPanel{
 			
 		contaProve = 0;
 		
-		//this.setBorder(BorderFactory.createEmptyBorder(1270/2 - 100, 650/2 - 100, 250, 250));
+		/**
+		 * Creazione di un nuovo pannello per centrare gli elementi del login nella pagina.
+		 * Il meccanismo funziona così: LoginPanel che contiene tutto ed è gestito da un 
+		 * layout gbl. Inoltre al pannello principale vengono aggiunti un secondo pannello
+		 * jp e il suo layout gl.
+		 * Impostazione del colore di sfondo per entrambi i pannelli. 
+		 */
+		JPanel jp = new JPanel();
+		setBackground(Color.green);
+		jp.setBackground(Color.green);
 		
-		gl = new GroupLayout(this);
-		this.setLayout(gl);
+		GroupLayout gl = new GroupLayout(jp);
+		jp.setLayout(gl);
 		gl.setAutoCreateGaps(true);
 		gl.setAutoCreateContainerGaps(true);
+
+		GridBagLayout gbl = new GridBagLayout();
+		GridBagConstraints gblc = new GridBagConstraints();
+		gblc.anchor = GridBagConstraints.CENTER;
+		setLayout(gbl);
+		add(jp, gblc);
 		
+		/**
+		 * Dichiarazione dei widget e dei relativi parametri.
+		 * Aggiunta dei widget al LoginPanel. 
+		 */
 		nameLabel = new JLabel("Username: ");
 		nameTxt = new JTextField(15); 
 		nameTxt.setEditable(true);
@@ -51,12 +78,15 @@ public class LoginPanel  extends DefaultPanel{
 		okButton = new JButton("Conferma");
 		okButton.addActionListener(this);
 		
-		this.add(nameLabel);
-		this.add(nameTxt);
-		this.add(pswLabel);
-		this.add(pswTxt);
-		this.add(okButton);
+		add(nameLabel);
+		add(nameTxt);
+		add(pswLabel);
+		add(pswTxt);
+		add(okButton);
 		
+		/**
+		 * Posizionamento dei widget all'interno del layout gl.
+		 */
 		gl.setHorizontalGroup(
 				gl.createSequentialGroup()
 					.addGroup(
@@ -89,13 +119,18 @@ public class LoginPanel  extends DefaultPanel{
 	}
 	
 	/**
-	 * controllo delle stringhe immesse con i dati nel "database" se true => controlla se
+	 * Controllo delle stringhe immesse con i dati nel "database" se true => controlla se
 	 * l'utente riconosciuto è admin o user e lancia una nuova finestra in base ai generics, 
 	 * altrimenti da errore e lascia riprovare l'immissione dei dati. I tentativi sono
 	 * limitati a un massimo di 5 in modo da ridurre la probabilità di un intrusione.
+	 * Utilizzo di una variabile temp di tipo String perchè il tipo di ritorno di getPassword
+	 * è un array di caratteri e per effettuare il controllo con la password all'interno
+	 * dell'array bisogna effettuare un cast implicito.
 	 */ 
+	@Override
 	public void actionPerformed(ActionEvent e){ 
 		
+		String temp = new String(pswTxt.getPassword());
 		boolean checklogin = false;
 			
 		if(contaProve >= 5){
@@ -106,23 +141,19 @@ public class LoginPanel  extends DefaultPanel{
 			JOptionPane.showMessageDialog(this, "Non hai più tentativi disponibili, contatta il nostro servizio clienti",
 				    "A caccia di malintenzionati",JOptionPane.ERROR_MESSAGE);
 		}else{
-			
 			for(int i = 0; i < arrayUtenti.length; i++){
-				if(nameTxt.getText().equals(arrayUtenti[i].getNome()) && pswTxt.getPassword().equals(arrayUtenti[i].getPassword())){
+				if(nameTxt.getText().equals(arrayUtenti[i].getNome()) && temp.equals(arrayUtenti[i].getPassword())){
 					if(arrayUtenti[i].getIsAdmin()){
-						handlepanel.switchPanel(AdminPanel.TAG);
+						handlePanel.switchPanel(AdminPanel.TAG);
 						checklogin = true;
-						System.out.println("admin");
 					}else{
-						handlepanel.switchPanel(LoginPanel.TAG);
+						handlePanel.switchPanel(UserPanel.TAG);
 						checklogin = true;
-						System.out.println("user");
 					}
 				}
 			}
 			
 			if(!checklogin){
-			
 				contaProve++;
 				JOptionPane.showMessageDialog(this,"Controlla le tue credenziali, user e/o password sono errati",
 						"Credenziali errate",JOptionPane.WARNING_MESSAGE);

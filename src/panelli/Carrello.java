@@ -1,5 +1,7 @@
 package panelli;
 
+import java.awt.Color;
+
 public class Carrello extends DefaultPanel {
 	
 	/**
@@ -11,6 +13,7 @@ public class Carrello extends DefaultPanel {
 	public Carrello(HandlePanel handlePanel) {
 		
 		super(handlePanel);
+		setBackground(Color.magenta);
 	}
 
 }

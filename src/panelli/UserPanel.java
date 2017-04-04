@@ -1,5 +1,7 @@
 package panelli;
 
+import java.awt.Color;
+
 public class UserPanel extends DefaultPanel{
 	
 	/**
@@ -11,6 +13,7 @@ public class UserPanel extends DefaultPanel{
 	public UserPanel(HandlePanel handlePanel) {
 		
 		super(handlePanel);
+		setBackground(Color.yellow);
 		
 	}
 

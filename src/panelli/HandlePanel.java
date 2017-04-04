@@ -2,7 +2,6 @@ package panelli;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -10,10 +9,14 @@ public class HandlePanel extends JFrame{
 
 	/**
 	 * @var container
-	 * Panello principale che gestisce i pannelli tramite un cardLayout
+	 * Panello principale che gestisce i pannelli tramite un cardLayout.
 	 */
 	private JPanel container;
 	
+	/**
+	 * Costruttore della classe HandlePanel. Crea e gestisce il cardLayout ed è
+	 * inoltre il Frame principale dell'ECommerce.
+	 */
 	public HandlePanel(){
 		
 		container = new JPanel(new CardLayout());
@@ -32,9 +35,15 @@ public class HandlePanel extends JFrame{
 		setVisible(true);
 	}
 	
-	public void switchPanel(String currentTag){
+	
+	/**
+	 * @param nextTag
+	 * Serve a spostarsi fra un pannello ed un altro con il parametro nextTag
+	 * che dice appunto il prossimo pannello.
+	 */
+	public void switchPanel(String nextTag){
 		CardLayout cl = (CardLayout)(container.getLayout());
-        cl.show(container, currentTag);  
+        cl.show(container, nextTag);  
 	}
 	
 }
