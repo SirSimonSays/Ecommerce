@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
+
 import user.Admin;
 import user.User;
 import user.Utente;
@@ -20,7 +21,7 @@ public class LoginPanel  extends DefaultPanel{
 	private JLabel nameLabel, pswLabel;
 	private JTextField nameTxt;
 	private JPasswordField pswTxt;
-	private JButton okButton;
+	private JButton okButton, gearButton;
 	
 	private Utente[] arrayUtenti = new Utente[2];
 	private int contaProve;
@@ -78,6 +79,9 @@ public class LoginPanel  extends DefaultPanel{
 		okButton = new JButton("Conferma");
 		okButton.addActionListener(this);
 		
+		gearButton = new JButton(new ImageIcon("/image/gear.png"));
+		gearButton.addActionListener(this);
+		
 		add(nameLabel);
 		add(nameTxt);
 		add(pswLabel);
@@ -98,8 +102,11 @@ public class LoginPanel  extends DefaultPanel{
 							gl.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addComponent(nameTxt)
 							.addComponent(pswTxt)
-							.addComponent(okButton)
+							.addGroup(gl.createSequentialGroup()
+									.addComponent(okButton)
+									.addComponent(gearButton)
 							)
+					)
 		);
 		gl.setVerticalGroup(
 				gl.createSequentialGroup()
@@ -113,7 +120,11 @@ public class LoginPanel  extends DefaultPanel{
 							.addComponent(pswLabel)
 							.addComponent(pswTxt)
 							)
-					.addComponent(okButton)
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(okButton)
+							.addComponent(gearButton)
+							)
 		);
 		
 	}
@@ -129,38 +140,42 @@ public class LoginPanel  extends DefaultPanel{
 	 */ 
 	@Override
 	public void actionPerformed(ActionEvent e){ 
-		
-		String temp = new String(pswTxt.getPassword());
-		boolean checklogin = false;
-			
-		if(contaProve >= 5){
-			nameTxt.setEditable(false);
-			pswTxt.setEditable(false);
-			nameTxt.setText("");
-			pswTxt.setText("");
-			JOptionPane.showMessageDialog(this, "Non hai più tentativi disponibili, contatta il nostro servizio clienti",
-				    "A caccia di malintenzionati",JOptionPane.ERROR_MESSAGE);
-		}else{
-			for(int i = 0; i < arrayUtenti.length; i++){
-				if(nameTxt.getText().equals(arrayUtenti[i].getNome()) && temp.equals(arrayUtenti[i].getPassword())){
-					if(arrayUtenti[i].getIsAdmin()){
-						handlePanel.switchPanel(AdminPanel.TAG);
-						checklogin = true;
-					}else{
-						handlePanel.switchPanel(UserPanel.TAG);
-						checklogin = true;
-					}
-				}
-			}
-			
-			if(!checklogin){
-				contaProve++;
-				JOptionPane.showMessageDialog(this,"Controlla le tue credenziali, user e/o password sono errati",
-						"Credenziali errate",JOptionPane.WARNING_MESSAGE);
+		if(e.getActionCommand().equals("Conferma")){
+			String temp = new String(pswTxt.getPassword());
+			boolean checklogin = false;
+				
+			if(contaProve >= 5){
+				nameTxt.setEditable(false);
+				pswTxt.setEditable(false);
 				nameTxt.setText("");
 				pswTxt.setText("");
-			}
-		}	
+				JOptionPane.showMessageDialog(this, "Non hai più tentativi disponibili, contatta il nostro servizio clienti",
+					    "A caccia di malintenzionati",JOptionPane.ERROR_MESSAGE);
+			}else{
+				for(int i = 0; i < arrayUtenti.length; i++){
+					if(nameTxt.getText().equals(arrayUtenti[i].getNome()) && temp.equals(arrayUtenti[i].getPassword())){
+						if(arrayUtenti[i].getIsAdmin()){
+							handlePanel.switchPanel(AdminPanel.TAG);
+							checklogin = true;
+						}else{
+							handlePanel.switchPanel(UserPanel.TAG);
+							checklogin = true;
+						}
+					}
+				}
+				
+				if(!checklogin){
+					contaProve++;
+					JOptionPane.showMessageDialog(this,"Controlla le tue credenziali, user e/o password sono errati",
+							"Credenziali errate",JOptionPane.WARNING_MESSAGE);
+					nameTxt.setText("");
+					pswTxt.setText("");
+				}
+			}	
+		}else if(e.getActionCommand().equals(gearButton)){
+			//add user
+		}
 	}
+		
 
 }
