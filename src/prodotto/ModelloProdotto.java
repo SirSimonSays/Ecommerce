@@ -30,7 +30,7 @@ public class ModelloProdotto extends AbstractTableModel{
 	}
 	
 	public boolean isCellEditable(int row, int col) {
-		// nessuna cella editabile
+		//nessuna cella editabile
 		return false;
 	}
 

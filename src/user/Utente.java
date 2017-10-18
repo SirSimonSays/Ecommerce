@@ -1,24 +1,20 @@
 package user;
 
+import java.io.Serializable;
+
 /**
  * Classe astratta che rappresenta un utente, sia admin che user semplice in base
  * al parametro @isAdmin
  * @author Simone Cavana
  */
 
-public abstract class Utente {
+public abstract class Utente implements Serializable{
 	
 	/**
 	 * @var nome
 	 * Nome utente
 	 */
 	private String nome;
-
-	/**
-	 * @var email
-	 * Email utente
-	 */
-	private String email;
 	
 	/**
 	 * @var password
@@ -35,14 +31,12 @@ public abstract class Utente {
 	/**
 	 * @brief Costruttore
 	 * @param nome Nome utente
-	 * @param email Email utente
 	 * @param password Password utente
 	 * @param isAdmin Admin o user semplice
 	 */
-	public Utente(String nome, String email, String password, Boolean isAdmin) {
+	public Utente(String nome, String password, Boolean isAdmin) {
 		super();
 		this.nome = nome;
-		this.email = email;
 		this.password = password;
 		this.isAdmin = isAdmin;
 	}
@@ -53,14 +47,6 @@ public abstract class Utente {
 	 */
 	public String getNome() {
 		return nome;
-	}
-	
-	/**
-	 * @brief Ritorna l'email dell'utente 
-	 * @return Email utente
-	 */
-	public String getEmail() {
-		return email;
 	}
 	
 	/**
@@ -88,14 +74,6 @@ public abstract class Utente {
 	}
 	
 	/**
-	 * @brief Setta l'email dell'utente
-	 * @param email
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	/**
 	 * @brief Setta la password dell'utente
 	 * @param password
 	 */
@@ -110,5 +88,31 @@ public abstract class Utente {
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
+	/**
+	 * @brief redifinizione del metodo toString per la stampa di un oggetto di
+	 * tipo Utente.
+	 */
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return nome + " " + password + " " + isAdmin;
+	}
+	
+	/**
+	 * @brief redifinizione del metodo equals per confrontare un elemento con
+	 * un elemento del Vector.
+	 */
+	public boolean equals(Object o){
+		if(o == null || !getClass().equals(o.getClass())) return false;
+		if(o == this) return true;
 		
+		Utente u = (Utente) o;
+		if(this.nome.compareTo(u.nome) == 0 && 
+		   this.password.compareTo(u.password) == 0 && 
+		   this.isAdmin.compareTo(u.isAdmin) == 0)
+			return true;
+		return false;
+		
+	}
 }

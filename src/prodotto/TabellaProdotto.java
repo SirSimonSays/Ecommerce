@@ -20,11 +20,11 @@ public class TabellaProdotto extends JScrollPane{
 	/**
 	 * Costruttore.
 	 */
-	public TabellaProdotto(){
+	public TabellaProdotto(ModelloProdotto m){
 		
 		super();
 		
-		dataModel = new ModelloProdotto();
+		dataModel = m;
 		t = new JTable(dataModel);
 		
 		t.setColumnSelectionAllowed(false);
@@ -32,8 +32,6 @@ public class TabellaProdotto extends JScrollPane{
 		
 		t.setRowHeight(100);
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		
-		
 		
 		add(t);
 		

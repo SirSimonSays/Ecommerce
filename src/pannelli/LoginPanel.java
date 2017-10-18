@@ -1,47 +1,54 @@
-package panelli;
+package pannelli;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import user.Admin;
-import user.User;
-import user.Utente;
+import user.*;
 
-public class LoginPanel  extends DefaultPanel{
+public class LoginPanel extends DefaultPanel{
 	
 	/**
 	 * @var TAG
 	 * Tag univoco utilizzato per identificare questa schermata  
 	 */
 	public static final String TAG = "login";
-
-	private JLabel nameLabel, pswLabel;
+	
+	private JLabel nameLabel, pswLabel, imgLabel;
 	private JTextField nameTxt;
 	private JPasswordField pswTxt;
 	private JButton okButton, gearButton;
 	
-	private Utente[] arrayUtenti = new Utente[2];
+	/**
+	 * @var contaProve
+	 * variabile contatore che controlla che non vengano fatte più di MAX prove.
+	 */
 	private int contaProve;
 	
 	/**
-	 * Costruttore
+	 * @var maxProve
+	 * numero massimo di tentativi per effettuare il login.
+	 */
+	private static int maxProve;
+	
+	/**
+	 * @brief costruttore
 	 * @param handlePanel
 	 * Costruttore che definisce e setta tutti gli oggetti della finestra
 	 */
 	public LoginPanel(HandlePanel handlePanel) {
 		
-		super(handlePanel);
+		super(handlePanel);		
 		
-		/**definizione di una "base di dati" di utenti e relativi attributi*/		
-		Admin admin1 = new Admin("simone","simone@gmail.com","ciao");
-		User user1 = new User("carlo","carlo@libero.it","mamma");
-		arrayUtenti[0] = admin1; 
-		arrayUtenti[1] = user1;
-			
 		contaProve = 0;
+		maxProve = 3;
 		
 		/**
 		 * Creazione di un nuovo pannello per centrare gli elementi del login nella pagina.
@@ -76,10 +83,26 @@ public class LoginPanel  extends DefaultPanel{
 		pswTxt = new JPasswordField(15); 
 		pswTxt.setEditable(true);
 		
+		InputStream imageStream = this.getClass().getResourceAsStream("/image/user.png");
+		BufferedImage img;
+		try {
+			img = ImageIO.read(imageStream);
+			imgLabel = new JLabel(new ImageIcon(img));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		okButton = new JButton("Conferma");
 		okButton.addActionListener(this);
 		
-		gearButton = new JButton(new ImageIcon("/image/gear.png"));
+		try{
+			gearButton = new JButton(new ImageIcon(LoginPanel.class.getResource("/image/gear.png")));
+		}catch(Exception e){
+			System.out.println("impossibile trovare l'immagine" + e);
+		}
+		
+		gearButton.setSize(250, 350);
 		gearButton.addActionListener(this);
 		
 		add(nameLabel);
@@ -93,6 +116,10 @@ public class LoginPanel  extends DefaultPanel{
 		 */
 		gl.setHorizontalGroup(
 				gl.createSequentialGroup()
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(imgLabel)
+							)
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addComponent(nameLabel)
@@ -112,39 +139,48 @@ public class LoginPanel  extends DefaultPanel{
 				gl.createSequentialGroup()
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(nameLabel)
-							.addComponent(nameTxt)
-							)
-					.addGroup(
-							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(pswLabel)
-							.addComponent(pswTxt)
-							)
-					.addGroup(
-							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(okButton)
-							.addComponent(gearButton)
+							.addComponent(imgLabel)
+							.addGroup(gl.createSequentialGroup()
+								.addGroup(
+									gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(nameLabel)
+									.addComponent(nameTxt)
+									)
+								.addGroup(
+									gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(pswLabel)
+									.addComponent(pswTxt)
+									)
+								.addGroup(
+									gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(okButton)
+									.addComponent(gearButton)
+									)
+								)
 							)
 		);
 		
 	}
 	
 	/**
-	 * Controllo delle stringhe immesse con i dati nel "database" se true => controlla se
-	 * l'utente riconosciuto è admin o user e lancia una nuova finestra in base ai generics, 
-	 * altrimenti da errore e lascia riprovare l'immissione dei dati. I tentativi sono
-	 * limitati a un massimo di 5 in modo da ridurre la probabilità di un intrusione.
+	 * @param e
+	 * Nell'if viene chiamato il metodo di HandleUser per confrontare i dati immessi con quelli
+	 * presenti nei file "userFile.txt", se l'utente riconosciuto è admin o user viene lanciata una
+	 * nuova finestra in base ai generics, altrimenti da errore e lascia riprovare l'immissione
+	 * dei dati. I tentativi sono limitati a @var maxProve in modo da ridurre la probabilità 
+	 * di intrusione.
 	 * Utilizzo di una variabile temp di tipo String perchè il tipo di ritorno di getPassword
 	 * è un array di caratteri e per effettuare il controllo con la password all'interno
 	 * dell'array bisogna effettuare un cast implicito.
+	 * Nel caso else viene analizzato l'evento create dalla pressione del bottone "ingranaggio" 
+	 * per creare un nuovo utente e quindi lanciata la finestra adeguata tramite HandleUser. 
 	 */ 
 	@Override
 	public void actionPerformed(ActionEvent e){ 
 		if(e.getActionCommand().equals("Conferma")){
 			String temp = new String(pswTxt.getPassword());
-			boolean checklogin = false;
 				
-			if(contaProve >= 5){
+			if(contaProve >= maxProve){
 				nameTxt.setEditable(false);
 				pswTxt.setEditable(false);
 				nameTxt.setText("");
@@ -152,30 +188,23 @@ public class LoginPanel  extends DefaultPanel{
 				JOptionPane.showMessageDialog(this, "Non hai più tentativi disponibili, contatta il nostro servizio clienti",
 					    "A caccia di malintenzionati",JOptionPane.ERROR_MESSAGE);
 			}else{
-				for(int i = 0; i < arrayUtenti.length; i++){
-					if(nameTxt.getText().equals(arrayUtenti[i].getNome()) && temp.equals(arrayUtenti[i].getPassword())){
-						if(arrayUtenti[i].getIsAdmin()){
-							handlePanel.switchPanel(AdminPanel.TAG);
-							checklogin = true;
-						}else{
-							handlePanel.switchPanel(UserPanel.TAG);
-							checklogin = true;
-						}
-					}
-				}
 				
-				if(!checklogin){
+				if(!user.HandleUser.checkUser(nameTxt.getText(), temp)){
 					contaProve++;
 					JOptionPane.showMessageDialog(this,"Controlla le tue credenziali, user e/o password sono errati",
 							"Credenziali errate",JOptionPane.WARNING_MESSAGE);
-					nameTxt.setText("");
-					pswTxt.setText("");
 				}
+				nameTxt.setText("");
+				pswTxt.setText("");
 			}	
-		}else if(e.getActionCommand().equals(gearButton)){
-			//add user
+		}else if(e.getSource().equals(gearButton)){
+			nameTxt.setText("");
+			pswTxt.setText("");
+			HandlePanel.switchPanel(CreaUtente.TAG);
 		}
 	}
+	
+	
 		
 
 }

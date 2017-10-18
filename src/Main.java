@@ -1,5 +1,5 @@
-import panelli.HandlePanel;
-import panelli.LoginPanel;
+import pannelli.HandlePanel;
+import pannelli.LoginPanel;
 
 /**
  * Classe main
@@ -11,6 +11,8 @@ public class Main {
 	/**
 	 * Metodo main
 	 * @param args
+	 * @brief metodo iniziale che istanzia una finestra principale e switcha al
+	 * pannello di login.
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

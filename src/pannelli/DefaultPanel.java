@@ -1,4 +1,4 @@
-package panelli;
+package pannelli;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -49,11 +49,15 @@ public abstract class DefaultPanel extends JPanel implements ActionListener{
 		handlePanel.setMenuBar(mainMb);
 	}
 
+	/**
+	 * @param e
+	 * metodo per la gestione degli eventi a seguito di azioni sull'interfaccia.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("Logout")){
-			
+			HandlePanel.switchPanel(LoginPanel.TAG);
 		}else if(e.getActionCommand().equals("Exit")){
 			System.exit(0);
 		}
