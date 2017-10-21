@@ -1,6 +1,7 @@
 package pannelli;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 
 public class Carrello extends DefaultPanel {
 	
@@ -19,6 +20,13 @@ public class Carrello extends DefaultPanel {
 		
 		super(handlePanel);
 		setBackground(Color.magenta);
+		
+		
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e){ 
+		
+	}		
 
 }

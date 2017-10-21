@@ -5,8 +5,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
+import prodotto.HandleProduct;
 import prodotto.ModelloProdotto;
 import prodotto.TabellaProdotto;
 
@@ -88,6 +90,16 @@ public class AdminPanel extends DefaultPanel{
 		add(tabProd, BorderLayout.CENTER);
 
 	}
+	
+	/**
+	 * @brief All'ingresso della schermata ricarica i prodotti
+	 */
+	@Override
+	public void onEnter() {
+		//System.out.println("sto caricando da file e leggendo sulla tabella");
+		HandleProduct.leggiProdotti();
+		tabProd.refresh();
+	}
 
 	/**
 	 * @param e
@@ -100,7 +112,13 @@ public class AdminPanel extends DefaultPanel{
 		}else if(e.getSource().equals(add)){
 			HandlePanel.switchPanel(CreaProdotto.TAG);
 		}else if(e.getSource().equals(delete)){
-			
+			if(tabProd.getSelectedRow() != -1){
+				HandleProduct.rimuoviProdotto(tabProd.getSelectedRow());
+				tabProd.refresh();
+			}else{
+				JOptionPane.showMessageDialog(this,"Per poter eliminare un prodotto devi prima selezionarlo.",
+						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 	}
 }

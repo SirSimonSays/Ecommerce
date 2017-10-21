@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.util.Locale.Category;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -11,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import prodotto.Prodotto;
 
 public class CreaProdotto extends DefaultPanel{
 	
@@ -98,6 +101,7 @@ public class CreaProdotto extends DefaultPanel{
 		add(catT);
 		add(prezzoL);
 		add(prezzoT);
+		add(fotoL);
 		add(okButton);
 		add(cancelButton);
 		
@@ -122,6 +126,7 @@ public class CreaProdotto extends DefaultPanel{
 							.addComponent(marcaT)
 							.addComponent(catT)
 							.addComponent(prezzoT)
+							//.addComponent(fotoT)
 							.addGroup(gl.createSequentialGroup()
 									.addComponent(okButton)
 									.addComponent(cancelButton)
@@ -147,11 +152,6 @@ public class CreaProdotto extends DefaultPanel{
 							)
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(marcaL)
-							.addComponent(marcaT)
-							)
-					.addGroup(
-							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(catL)
 							.addComponent(catT)
 							)
@@ -163,6 +163,7 @@ public class CreaProdotto extends DefaultPanel{
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(fotoL)
+							//.addComponent(fotoT)
 							)
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -173,6 +174,19 @@ public class CreaProdotto extends DefaultPanel{
 
 	}
 	
+	public CreaProdotto(HandlePanel handlePanel, Prodotto p){
+		this(handlePanel);
+		
+		codT.setText(Integer.toString(p.getId()));
+		codT.setEditable(false);
+		
+		nomeT.setText(p.getNome());
+		marcaT.setText(p.getNome());
+		catT.setText(p.getCategoria());
+		prezzoT.setText(Float.toString(p.getPrezzo()));
+		//fotoT.
+		
+	}
 	
 	/**
 	 * @param e

@@ -7,8 +7,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+
+import carrello.HandleCarrello;
+
+import prodotto.HandleProduct;
 import prodotto.ModelloProdotto;
 import prodotto.TabellaProdotto;
 
@@ -108,13 +113,28 @@ public class UserPanel extends DefaultPanel{
 	}
 	
 	/**
+	 * @brief All'ingresso della schermata ricarica i prodotti
+	 */
+	@Override
+	public void onEnter() {
+		HandleProduct.leggiProdotti();
+		tabProd.refresh();
+	}
+	
+	/**
 	 * @param e
 	 * controllo degli eventi in base alla pressione dei bottoni.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e){ 
 		if(e.getSource().equals(addCarrello)){
-			
+			if(tabProd.getSelectedRow() != -1){
+				HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
+				tabProd.refresh();
+			}else{
+				JOptionPane.showMessageDialog(this,"Per poter aggiungere un prodotto devi prima selezionarlo.",
+						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}else if(e.getSource().equals(trova)){
 			
 		}else if(e.getSource().equals(carrello)){

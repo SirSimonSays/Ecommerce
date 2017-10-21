@@ -50,6 +50,35 @@ public abstract class DefaultPanel extends JPanel implements ActionListener{
 	}
 
 	/**
+	 * @brief metodo chiamato in automatico alla visualizzazione della schermata
+	 */
+	public void onEnter() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * @brief metodo chiamato in automatico alla chiusura della schermata
+	 */
+	public void onExit(){
+		
+	}
+	
+	/**
+	 * @brief override per implementare la chiamata automatica di onEnter e onExit
+	 */
+	@Override
+	public void setVisible(boolean aFlag) {
+		super.setVisible(aFlag);
+		if(aFlag){
+			onEnter();
+		}
+		else{
+			onExit();
+		}
+	}
+	
+	/**
 	 * @param e
 	 * metodo per la gestione degli eventi a seguito di azioni sull'interfaccia.
 	 */

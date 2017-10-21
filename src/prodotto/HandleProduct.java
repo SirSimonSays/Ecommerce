@@ -23,7 +23,7 @@ public class HandleProduct {
 	
 	/**
 	 * @var prodotti
-	 * Vettore che contiene le istante di tutti i prodotti
+	 * Vettore che contiene le istanze di tutti i prodotti
 	 */	
 	private static Vector<Prodotto> prodotti = new Vector<Prodotto>();
 	
@@ -35,7 +35,7 @@ public class HandleProduct {
 		// TODO Auto-generated constructor stub
 	
 	}
-
+	
 	/**
 	 * @brief metodo per aprire il file "prodFile.txt". 
 	 * @return stato dell'apertura
@@ -79,9 +79,38 @@ public class HandleProduct {
 		
 		return readState;
 	}
-		
+	
 	/**
-	 * @brief scrittura sul file
+	 * @brief getter del numero di prodotti
+	 * @return numero dei prodotti
+	 */
+	public static int getProductCount(){
+		return prodotti == null ? 0 : prodotti.size();
+	}
+	
+	/**
+	 * @brief getter dell'indice di p
+	 * @param p
+	 * @return l'indice del prodotto p 
+	 */
+	public static int getProductIndex(Prodotto p){
+		return prodotti.indexOf(p);
+	}
+	
+	/**
+	 * @brief getter del prodotto all'index
+	 * @param index
+	 * @return prodotto all'indice index
+	 */
+	public static Prodotto getProduct(int index){
+		if(index < prodotti.size()){
+			return prodotti.get(index);
+		}
+		return null;
+	}
+	
+	/**
+	 * @brief scrittura sul file di un nuovo prodotto
 	 * @param i id prodotto
 	 * @param n nome prodotto
 	 * @param m marca prodotto
@@ -105,7 +134,7 @@ public class HandleProduct {
 			return writeState;
 		
 		prodotti.addElement(p);
-		
+				
 		//for(int index = 0; index < prodotti.size(); index ++)
 		//	System.out.println(prodotti.elementAt(index));
 		
@@ -127,10 +156,42 @@ public class HandleProduct {
 				
 		return writeState;
 	}
-
 	
 	/*
-	public static boolean rimuoviProdotto(int i, String n, String m, String c){
+	 * @brief rimozione di un prodotto
+	 * metodo per la rimozione prodotto all'interno del file.
+	 * @return stato dell'operazione
+	 */
+	public static boolean rimuoviProdotto(int index){
+		boolean removeState = false;
+		
+		prodotti.remove(index);
+		
+		try {
+			FileOutputStream fos = new FileOutputStream(fileProdotto);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(prodotti);
+			
+			oos.flush();
+			oos.close();
+			
+			System.out.println("File dei prodotti salvato");
+			removeState = true;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		return removeState;
+		
+	}
+	
+	/*
+	 * @brief modifica di un prodotto
+	 * metodo per modificare un prodotto all'interno del file.
+	 * @return stato dell'operazione
+	public static boolean modificaProdotto(int index){
 		
 		
 	}*/
