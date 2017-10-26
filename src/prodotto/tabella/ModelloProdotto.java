@@ -1,6 +1,9 @@
-package prodotto;
+package prodotto.tabella;
 
 import javax.swing.table.AbstractTableModel;
+
+import prodotto.HandleProduct;
+
 
 public class ModelloProdotto extends AbstractTableModel{
 	

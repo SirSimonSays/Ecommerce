@@ -24,7 +24,7 @@ public class CreaProdotto extends DefaultPanel{
 	public static final String TAG = "creaP";
 	
 	private JLabel codL, nomeL, marcaL, catL, prezzoL, fotoL;
-	private JTextField codT, nomeT, marcaT, catT, prezzoT;
+	protected JTextField codT, nomeT, marcaT, catT, prezzoT;
 	private JButton okButton, cancelButton;
 	
 	/**
@@ -174,20 +174,6 @@ public class CreaProdotto extends DefaultPanel{
 
 	}
 	
-	public CreaProdotto(HandlePanel handlePanel, Prodotto p){
-		this(handlePanel);
-		
-		codT.setText(Integer.toString(p.getId()));
-		codT.setEditable(false);
-		
-		nomeT.setText(p.getNome());
-		marcaT.setText(p.getNome());
-		catT.setText(p.getCategoria());
-		prezzoT.setText(Float.toString(p.getPrezzo()));
-		//fotoT.
-		
-	}
-	
 	/**
 	 * @param e
 	 * Metodo che gestisce gli eventi a seguito della pressione dei bottoni.
@@ -197,7 +183,8 @@ public class CreaProdotto extends DefaultPanel{
 	 * siano vuoti alla prossima apertura della finestra di creazione.
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e){ 
+	public void actionPerformed(ActionEvent e){
+		super.actionPerformed(e);
 		if(e.getActionCommand().equals("Conferma")){
 			
 			if(codT.getText().isEmpty() || nomeT.getText().isEmpty() || marcaT.getText().isEmpty() ||
@@ -208,7 +195,7 @@ public class CreaProdotto extends DefaultPanel{
 				if(prodotto.HandleProduct.aggiungiProdotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),
 				   catT.getText(), Float.parseFloat(prezzoT.getText()), "ciao")){
 					JOptionPane.showMessageDialog(this, "Prodotto inserito correttamente",
-							   "Ok",JOptionPane.INFORMATION_MESSAGE);
+							   "Operazione andata a buon fine",JOptionPane.INFORMATION_MESSAGE);
 					codT.setText("");
 					nomeT.setText("");
 					marcaT.setText("");
@@ -220,7 +207,7 @@ public class CreaProdotto extends DefaultPanel{
 							   "Errore",JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		}else{
+		}else if(e.getActionCommand().equals("Annulla")){
 			codT.setText("");
 			nomeT.setText("");
 			marcaT.setText("");

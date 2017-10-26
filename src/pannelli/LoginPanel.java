@@ -91,6 +91,7 @@ public class LoginPanel extends DefaultPanel{
 			imgLabel = new JLabel(new ImageIcon(img));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
+			System.out.println("impossibile trovare l'immagine " + e1);
 			e1.printStackTrace();
 		}
 		
@@ -100,7 +101,7 @@ public class LoginPanel extends DefaultPanel{
 		try{
 			gearButton = new JButton(new ImageIcon(LoginPanel.class.getResource("/image/gear.png")));
 		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine" + e);
+			System.out.println("impossibile trovare l'immagine " + e);
 		}
 		
 		gearButton.setSize(250, 350);
@@ -111,6 +112,8 @@ public class LoginPanel extends DefaultPanel{
 		add(pswLabel);
 		add(pswTxt);
 		add(okButton);
+		add(gearButton);
+		add(imgLabel);
 		
 		/**
 		 * Posizionamento dei widget all'interno del layout gl.
@@ -178,6 +181,7 @@ public class LoginPanel extends DefaultPanel{
 	 */ 
 	@Override
 	public void actionPerformed(ActionEvent e){ 
+		super.actionPerformed(e);
 		if(e.getActionCommand().equals("Conferma")){
 			String temp = new String(pswTxt.getPassword());
 				

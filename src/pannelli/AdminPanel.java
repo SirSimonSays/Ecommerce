@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import prodotto.HandleProduct;
-import prodotto.ModelloProdotto;
-import prodotto.TabellaProdotto;
+import prodotto.tabella.ModelloProdotto;
+import prodotto.tabella.TabellaProdotto;
 
 public class AdminPanel extends DefaultPanel{
 	
@@ -62,21 +62,21 @@ public class AdminPanel extends DefaultPanel{
 		try{
 			edit = new JButton(new ImageIcon(AdminPanel.class.getResource("/image/edit.png")));
 		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine" + e);
+			System.out.println("impossibile trovare l'immagine " + e);
 		}
 		edit.addActionListener(this);
 		
 		try{
 			add = new JButton(new ImageIcon(AdminPanel.class.getResource("/image/add.png")));
 		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine" + e);
+			System.out.println("impossibile trovare l'immagine " + e);
 		}
 		add.addActionListener(this);
 		
 		try{
 			delete = new JButton(new ImageIcon(AdminPanel.class.getResource("/image/delete.png")));
 		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine" + e);
+			System.out.println("impossibile trovare l'immagine " + e);
 		}
 		delete.addActionListener(this);
 		
@@ -107,8 +107,16 @@ public class AdminPanel extends DefaultPanel{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e){ 
+		super.actionPerformed(e);
 		if(e.getSource().equals(edit)){
-			
+			if(tabProd.getSelectedRow() != -1){
+				EditProdotto.setIndex(tabProd.getSelectedRow());
+				HandlePanel.switchPanel(EditProdotto.TAG);
+				tabProd.refresh();
+			}else{
+				JOptionPane.showMessageDialog(this,"Per poter modificare un prodotto devi prima selezionarlo.",
+						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}else if(e.getSource().equals(add)){
 			HandlePanel.switchPanel(CreaProdotto.TAG);
 		}else if(e.getSource().equals(delete)){

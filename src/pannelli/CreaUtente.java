@@ -4,8 +4,13 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -135,7 +140,8 @@ public class CreaUtente extends DefaultPanel{
 	 * siano vuoti alla prossima apertura della finestra di creazione.
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e){ 
+	public void actionPerformed(ActionEvent e){
+		super.actionPerformed(e);
 		if(e.getActionCommand().equals("Conferma")){
 			String temp = new String(pswTxt.getPassword());
 			
@@ -154,7 +160,7 @@ public class CreaUtente extends DefaultPanel{
 							   "è stato riscontrato un problema!",JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		}else{
+		}else if(e.getActionCommand().equals("Annulla")){
 			nameTxt.setText("");
 			pswTxt.setText("");
 			HandlePanel.switchPanel(LoginPanel.TAG);

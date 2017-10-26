@@ -12,6 +12,9 @@ public class HandleCarrello {
 	 */	
 	private static Vector<Prodotto> carrello = new Vector<Prodotto>();
 	
+	/**
+	 * @brief Costruttutore private per evitare la creazione di un'istanza
+	 */
 	private HandleCarrello(){
 		
 	}
@@ -20,11 +23,11 @@ public class HandleCarrello {
 		carrello.addElement(p);
 	}
 	
-	public void rimuoviProd(Prodotto p){
+	public static void rimuoviProd(Prodotto p){
 		carrello.removeElement(p);
 	}
 	
-	public void svuota(){
+	public static void svuota(){
 		carrello.removeAllElements();
 	}
 

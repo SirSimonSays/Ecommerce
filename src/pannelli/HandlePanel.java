@@ -25,6 +25,7 @@ public class HandlePanel extends JFrame{
 		container.add(new AdminPanel(this), AdminPanel.TAG);
 		container.add(new UserPanel(this), UserPanel.TAG);
 		container.add(new CreaProdotto(this), CreaProdotto.TAG);
+		container.add(new EditProdotto(this), EditProdotto.TAG);
 		container.add(new Carrello(this), Carrello.TAG);
 		
 		add(container);

@@ -1,4 +1,4 @@
-package prodotto;
+package prodotto.tabella;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

@@ -14,8 +14,8 @@ import javax.swing.JToolBar;
 import carrello.HandleCarrello;
 
 import prodotto.HandleProduct;
-import prodotto.ModelloProdotto;
-import prodotto.TabellaProdotto;
+import prodotto.tabella.ModelloProdotto;
+import prodotto.tabella.TabellaProdotto;
 
 public class UserPanel extends DefaultPanel{
 	
@@ -77,25 +77,25 @@ public class UserPanel extends DefaultPanel{
 		try{
 			trova = new JButton(new ImageIcon(UserPanel.class.getResource("/image/explore.png")));
 		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine" + e);
+			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		trova.setMaximumSize(new Dimension(32, 32));
+		//trova.setMaximumSize(new Dimension(32, 32));
 		trova.addActionListener(this);
 		
 		try{
 			carrello = new JButton(new ImageIcon(UserPanel.class.getResource("/image/basket.png")));
 		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine" + e);
+			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		carrello.setMaximumSize(new Dimension(32, 32));
+		//carrello.setMaximumSize(new Dimension(32, 32));
 		carrello.addActionListener(this);
 		
 		try{
 			addCarrello = new JButton(new ImageIcon(UserPanel.class.getResource("/image/addbasket.png")));
 		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine" + e);
+			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		addCarrello.setMaximumSize(new Dimension(32, 32));
+		//addCarrello.setMaximumSize(new Dimension(32, 32));
 		addCarrello.addActionListener(this);
 		
 		toolBar.add(addCarrello);
@@ -127,6 +127,7 @@ public class UserPanel extends DefaultPanel{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e){ 
+		super.actionPerformed(e);
 		if(e.getSource().equals(addCarrello)){
 			if(tabProd.getSelectedRow() != -1){
 				HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
