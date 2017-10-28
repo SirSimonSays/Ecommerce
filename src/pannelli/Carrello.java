@@ -7,9 +7,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import prodotto.HandleProduct;
+import prodotto.tabella.ModelloProdotto;
+import prodotto.tabella.TabellaProdotto;
 import carrello.HandleCarrello;
 
 /**
@@ -41,6 +44,18 @@ public class Carrello extends DefaultPanel {
 	 * bottone che ti permette di vuotare il carrello.
 	 */
 	private JButton svuotaCarrello;
+	
+	/**
+	 * @var eliminaProd
+	 * bottone che ti permette di eliminare un prodotto selezionato dal carrello.
+	 */
+	private JButton eliminaProd;
+	
+	/**
+	 * @var tabProd
+	 * Tabella dei prodotti nel carrello.
+	 */
+	private TabellaProdotto tabProd;
 	
 	/**
 	 * @brief costruttore
@@ -81,13 +96,35 @@ public class Carrello extends DefaultPanel {
 		//svuotaCarrello.setMaximumSize(new Dimension(32, 32));
 		svuotaCarrello.addActionListener(this);
 		
+		try{
+			eliminaProd = new JButton(new ImageIcon(Carrello.class.getResource("/image/delete.png")));
+		}catch(Exception e){
+			System.out.println("impossibile trovare l'immagine " + e);
+		}
+		//prec.setMaximumSize(new Dimension(32, 32));
+		prec.addActionListener(this);
+		
 		toolBar.add(prec);
 		toolBar.addSeparator();
 		toolBar.add(svuotaCarrello);
+		toolBar.add(eliminaProd);
 		toolBar.add(Box.createHorizontalGlue());
 		toolBar.add(acquista);
 		
+		//tabProd = new TabellaProdotto(new ModelloProdotto());
+		
 		add(toolBar, BorderLayout.PAGE_START);
+		//add(tabProd, BorderLayout.CENTER);
+
+	}
+	
+	/**
+	 * @brief All'ingresso della schermata ricarica i prodotti
+	 */
+	@Override
+	public void onEnter() {
+		
+		//tabProd.refresh();
 	}
 	
 	/**
@@ -99,10 +136,24 @@ public class Carrello extends DefaultPanel {
 		super.actionPerformed(e);
 		if(e.getSource().equals(prec)){
 			HandlePanel.switchPanel(UserPanel.TAG);
+			
 		}else if(e.getSource().equals(acquista)){
+			HandlePanel.switchPanel(Acquista.TAG);
 			
 		}else if(e.getSource().equals(svuotaCarrello)){
 			HandleCarrello.svuota();
+			
+		}else if(e.getSource().equals(eliminaProd)){
+			if(tabProd.getSelectedRow() != -1){
+				int res = JOptionPane.showConfirmDialog(this, "Vuoi eliminare questo prodotto dal carrello?", "Cancellare?", JOptionPane.YES_NO_OPTION);
+				if(res == JOptionPane.YES_OPTION){
+					HandleCarrello.rimuoviProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
+					tabProd.refresh();
+				}
+			}else{
+				JOptionPane.showMessageDialog(this,"Per poter eliminare un prodotto devi prima selezionarlo.",
+						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 	}	
 

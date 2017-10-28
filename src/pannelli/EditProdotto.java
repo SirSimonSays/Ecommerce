@@ -64,7 +64,7 @@ public class EditProdotto extends CreaProdotto {
 			codT.setEditable(false);
 			
 			nomeT.setText(p.getNome());
-			marcaT.setText(p.getNome());
+			marcaT.setText(p.getMarca());
 			catT.setText(p.getCategoria());
 			prezzoT.setText(Float.toString(p.getPrezzo()));
 			//fotoT.setPhotoPath(p.getphotoPath);
@@ -107,6 +107,5 @@ public class EditProdotto extends CreaProdotto {
 			HandlePanel.switchPanel(AdminPanel.TAG);
 		}
 	}
-
-
+	
 }

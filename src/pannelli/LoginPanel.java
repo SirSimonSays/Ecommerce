@@ -94,7 +94,7 @@ public class LoginPanel extends DefaultPanel{
 			System.out.println("impossibile trovare l'immagine " + e1);
 			e1.printStackTrace();
 		}
-		
+	
 		okButton = new JButton("Conferma");
 		okButton.addActionListener(this);
 		
@@ -188,28 +188,27 @@ public class LoginPanel extends DefaultPanel{
 			if(contaProve >= maxProve){
 				nameTxt.setEditable(false);
 				pswTxt.setEditable(false);
-				nameTxt.setText("");
-				pswTxt.setText("");
 				JOptionPane.showMessageDialog(this, "Non hai più tentativi disponibili, contatta il nostro servizio clienti",
 					    "A caccia di malintenzionati",JOptionPane.ERROR_MESSAGE);
 			}else{
-				
+
 				if(!user.HandleUser.checkUser(nameTxt.getText(), temp)){
 					contaProve++;
 					JOptionPane.showMessageDialog(this,"Controlla le tue credenziali, user e/o password sono errati",
 							"Credenziali errate",JOptionPane.WARNING_MESSAGE);
 				}
-				nameTxt.setText("");
-				pswTxt.setText("");
 			}	
 		}else if(e.getSource().equals(gearButton)){
-			nameTxt.setText("");
-			pswTxt.setText("");
 			HandlePanel.switchPanel(CreaUtente.TAG);
 		}
 	}
 	
-	
-		
+	/**
+	 * @brief metodo chiamato in automatico alla chiusura della schermata
+	 */
+	public void onExit(){
+		nameTxt.setText("");
+		pswTxt.setText("");
+	}
 
 }

@@ -152,8 +152,6 @@ public class CreaUtente extends DefaultPanel{
 				if(user.HandleUser.aggiungiUtente(nameTxt.getText(), temp, checkIsAdmin.isSelected())){
 					JOptionPane.showMessageDialog(this, "Utente inserito correttamente",
 							   "Ok",JOptionPane.INFORMATION_MESSAGE);
-					nameTxt.setText("");
-					pswTxt.setText("");
 					HandlePanel.switchPanel(LoginPanel.TAG);
 				}else{
 					JOptionPane.showMessageDialog(this, "L'utente potrebbe già esistere o i dati immessi non sono corretti",
@@ -161,10 +159,17 @@ public class CreaUtente extends DefaultPanel{
 				}
 			}
 		}else if(e.getActionCommand().equals("Annulla")){
-			nameTxt.setText("");
-			pswTxt.setText("");
 			HandlePanel.switchPanel(LoginPanel.TAG);
 		}
 		
+	}
+	
+	/**
+	 * @brief metodo chiamato in automatico alla chiusura della schermata
+	 */
+	public void onExit(){
+		nameTxt.setText("");
+		pswTxt.setText("");
+		checkIsAdmin.setSelected(false);
 	}
 }

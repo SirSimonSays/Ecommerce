@@ -20,10 +20,12 @@ public class HandleCarrello {
 	}
 	
 	public static void aggiungiProd(Prodotto p){
+		System.out.println(p);
 		carrello.addElement(p);
 	}
 	
 	public static void rimuoviProd(Prodotto p){
+		System.out.println(p);
 		carrello.removeElement(p);
 	}
 	

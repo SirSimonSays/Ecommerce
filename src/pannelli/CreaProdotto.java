@@ -102,6 +102,7 @@ public class CreaProdotto extends DefaultPanel{
 		add(prezzoL);
 		add(prezzoT);
 		add(fotoL);
+		//add(fotoT);
 		add(okButton);
 		add(cancelButton);
 		
@@ -196,11 +197,6 @@ public class CreaProdotto extends DefaultPanel{
 				   catT.getText(), Float.parseFloat(prezzoT.getText()), "ciao")){
 					JOptionPane.showMessageDialog(this, "Prodotto inserito correttamente",
 							   "Operazione andata a buon fine",JOptionPane.INFORMATION_MESSAGE);
-					codT.setText("");
-					nomeT.setText("");
-					marcaT.setText("");
-					catT.setText("");
-					prezzoT.setText("");
 					HandlePanel.switchPanel(AdminPanel.TAG);
 				}else{
 					JOptionPane.showMessageDialog(this, "Il prodotto potrebbe già esistere o i dati immessi non sono corretti",
@@ -208,13 +204,20 @@ public class CreaProdotto extends DefaultPanel{
 				}
 			}
 		}else if(e.getActionCommand().equals("Annulla")){
-			codT.setText("");
-			nomeT.setText("");
-			marcaT.setText("");
-			catT.setText("");
-			prezzoT.setText("");
 			HandlePanel.switchPanel(AdminPanel.TAG);
 		}
 	}
 
+	/**
+	 * @brief metodo chiamato in automatico alla chiusura della schermata
+	 */
+	public void onExit(){
+		codT.setText("");
+		nomeT.setText("");
+		marcaT.setText("");
+		catT.setText("");
+		prezzoT.setText("");
+	}
+
+	
 }

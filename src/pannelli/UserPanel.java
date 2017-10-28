@@ -143,4 +143,11 @@ public class UserPanel extends DefaultPanel{
 		}
 	}
 
+	/**
+	 * @brief metodo chiamato in automatico alla chiusura della schermata
+	 */
+	public void onExit(){
+		ricerca.setText("");
+	}
+	
 }

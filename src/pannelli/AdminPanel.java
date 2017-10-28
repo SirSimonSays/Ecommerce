@@ -1,6 +1,7 @@
 package pannelli;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
@@ -85,6 +86,7 @@ public class AdminPanel extends DefaultPanel{
 		toolBar.add(delete);
 		
 		tabProd = new TabellaProdotto(new ModelloProdotto());
+		//modifica la dimensione delle righe della tabella
 		
 		add(toolBar, BorderLayout.PAGE_START);		
 		add(tabProd, BorderLayout.CENTER);
@@ -96,7 +98,6 @@ public class AdminPanel extends DefaultPanel{
 	 */
 	@Override
 	public void onEnter() {
-		//System.out.println("sto caricando da file e leggendo sulla tabella");
 		HandleProduct.leggiProdotti();
 		tabProd.refresh();
 	}
@@ -121,12 +122,16 @@ public class AdminPanel extends DefaultPanel{
 			HandlePanel.switchPanel(CreaProdotto.TAG);
 		}else if(e.getSource().equals(delete)){
 			if(tabProd.getSelectedRow() != -1){
-				HandleProduct.rimuoviProdotto(tabProd.getSelectedRow());
-				tabProd.refresh();
+				int res = JOptionPane.showConfirmDialog(this, "Vuoi cancellare questo prodotto?", "Cancellare?", JOptionPane.YES_NO_OPTION);
+				if(res == JOptionPane.YES_OPTION){
+					HandleProduct.rimuoviProdotto(tabProd.getSelectedRow());
+					tabProd.refresh();
+				}
 			}else{
 				JOptionPane.showMessageDialog(this,"Per poter eliminare un prodotto devi prima selezionarlo.",
 						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
+
 }
