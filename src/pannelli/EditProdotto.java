@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 import prodotto.HandleProduct;
+import prodotto.Prod3x2;
+import prodotto.ProdSconto;
 import prodotto.Prodotto;
 
 public class EditProdotto extends CreaProdotto {
@@ -59,7 +61,7 @@ public class EditProdotto extends CreaProdotto {
 		//locazioni della memoria non adatti.
 		if(getIndex() != -1){
 			Prodotto p = HandleProduct.getProduct(index);
-		
+					
 			codT.setText(Integer.toString(p.getId()));
 			codT.setEditable(false);
 			
@@ -68,6 +70,18 @@ public class EditProdotto extends CreaProdotto {
 			catT.setText(p.getCategoria());
 			prezzoT.setText(Float.toString(p.getPrezzo()));
 			//fotoT.setPhotoPath(p.getphotoPath);
+			
+			String c = HandleProduct.getProductClass(index);
+			switch(c){
+			case "prodotto.Prodotto":
+				nosconto.setSelected(true);
+			case "prodotto.Prod3x2":
+				treXdue.setSelected(true);
+			case "prodotto.ProdSconto":
+				sconto.setSelected(true);
+				scontoT.setText(Integer.toString(p.getSconto()));
+		}
+			
 			
 		}else{
 			System.out.println("errore nell'passaggio dell'indice");

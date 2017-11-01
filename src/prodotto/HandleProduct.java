@@ -139,6 +139,15 @@ public class HandleProduct {
 	}
 	
 	/**
+	 * @brief serve a controllare il tipo di prodotto contenuto all'index 
+	 * @param index
+	 * @return la classe dell'elemento all'indice passato come parametro
+	 */
+	public static String getProductClass(int index){
+		return prodotti.elementAt(index).getClass().toString();
+	}
+	
+	/**
 	 * @brief scrittura sul file di un nuovo prodotto
 	 * @param i id prodotto
 	 * @param n nome prodotto

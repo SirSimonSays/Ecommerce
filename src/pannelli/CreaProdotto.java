@@ -29,8 +29,7 @@ public class CreaProdotto extends DefaultPanel{
 	private JLabel codL, nomeL, marcaL, catL, prezzoL, fotoL, scontoL;
 	protected JTextField codT, nomeT, marcaT, catT, prezzoT, scontoT;
 	private JButton okButton, cancelButton;
-	protected JRadioButton sconto, nosconto;
-	private JRadioButton treXdue;
+	protected JRadioButton sconto, nosconto, treXdue;
 	private ButtonGroup bg1;
 	
 	/**
