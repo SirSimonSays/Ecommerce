@@ -131,13 +131,13 @@ public class UserPanel extends DefaultPanel{
 		if(e.getSource().equals(addCarrello)){
 			if(tabProd.getSelectedRow() != -1){
 				HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
-				tabProd.refresh();
 			}else{
 				JOptionPane.showMessageDialog(this,"Per poter aggiungere un prodotto devi prima selezionarlo.",
 						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}else if(e.getSource().equals(trova)){
-			
+			int index = HandleProduct.saerchName(ricerca.getText());
+			System.out.println(index);
 		}else if(e.getSource().equals(carrello)){
 			HandlePanel.switchPanel(Carrello.TAG);
 		}

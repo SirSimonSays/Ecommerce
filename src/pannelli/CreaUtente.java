@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import user.HandleUser;
+
 public class CreaUtente extends DefaultPanel{
 
 	/**
@@ -129,6 +131,8 @@ public class CreaUtente extends DefaultPanel{
 							.addComponent(checkIsAdmin)
 							)
 		);
+		
+		HandleUser.leggiUtenti();
 	}
 
 	/**

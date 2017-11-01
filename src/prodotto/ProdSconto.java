@@ -10,7 +10,7 @@ public class ProdSconto extends Prodotto{
 	private int sconto;
 	
 	/**
-	 * 
+	 * @brief costruttore
 	 * @param id
 	 * @param nome
 	 * @param marca
@@ -20,17 +20,18 @@ public class ProdSconto extends Prodotto{
 	 * @param sconto
 	 */
 	public ProdSconto(int id, String nome, String marca, String categoria,
-			float prezzo, String photoPath, int sconto) {
+			float prezzo, String photoPath, int s) {
 		
 		super(id, nome, marca, categoria, prezzo, photoPath);
 		// TODO Auto-generated constructor stub
-		
+		sconto = s;
 		this.setPrezzo(applicaSconto(sconto));
 	}
 	
 	/**
 	 * @brief ritorna il valore attuale dello sconto.
 	 */
+	@Override
 	public int getSconto() {
 		return sconto;
 	}
@@ -40,6 +41,7 @@ public class ProdSconto extends Prodotto{
 	 * sia maggiore di zero e minore di cento, altrimento lo setta a zero. 
 	 * @param sconto
 	 */
+	@Override
 	public void setSconto(int sconto) {
 		if (sconto < 0)
 			sconto = 0;
@@ -59,4 +61,5 @@ public class ProdSconto extends Prodotto{
 		p -= super.getPrezzo() * s / 100;
 		return p;
 	}
+
 }

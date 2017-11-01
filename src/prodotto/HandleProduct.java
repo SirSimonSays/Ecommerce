@@ -151,12 +151,9 @@ public class HandleProduct {
 	 * se non disponibile venga creato.
 	 * @return stato della scrittura
 	 */
-	public static boolean aggiungiProdotto(int i, String n, String m, String c, float pr, String pp){
+	public static boolean aggiungiProdotto(Prodotto p){
 		
 		boolean addState = false;
-
-		Prodotto p;
-		p = new Prodotto(i, n, m, c, pr, pp);
 		
 		//controllo blando per verificare che il prodotto non sia presente
 		if(prodotti.contains(p))
@@ -205,5 +202,18 @@ public class HandleProduct {
 		editState = scriviProdotti();
 		
 		return editState;
+	}
+
+	/**
+	 * @brief ricerca veloce di un prodotto in base al nome
+	 * @param text
+	 * @return l'indice della riga dell'elemento cercato altrimenti -1
+	 */
+	public static int saerchName(String text) {
+		for(int i = 0; i < prodotti.size(); i++){
+			if(prodotti.elementAt(i).getNome().toLowerCase().equals(text.toLowerCase()))
+				return i;
+		}
+		return -1;
 	}
 }

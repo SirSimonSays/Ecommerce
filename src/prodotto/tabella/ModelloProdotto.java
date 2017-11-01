@@ -6,7 +6,6 @@ import prodotto.HandleProduct;
 import prodotto.Prod3x2;
 import prodotto.Prodotto;
 
-
 public class ModelloProdotto extends AbstractTableModel{
 	
 	/**
@@ -93,6 +92,12 @@ public class ModelloProdotto extends AbstractTableModel{
 	    return ColName[col];
 	}
 
+	/**
+	 * @brief Implementazione del metodo di {@link AbstractTableModel}
+	 * @param riga Indice della riga
+	 * @param col Indice della colonna
+	 * @return Ritorna l'oggetto contenuto in una cella della tabella
+	 */
 	@Override
 	public Object getValueAt(int riga, int col) {
 		// TODO Auto-generated method stub
@@ -123,7 +128,9 @@ public class ModelloProdotto extends AbstractTableModel{
 					if(p instanceof Prod3x2){
 						return "3x2";
 					}
-					//caso di prodotto in offerta
+					else if(p.getSconto() > 0){
+						return Integer.toString(p.getSconto()) + "%";
+					}
 					return "";
 			}
 		}

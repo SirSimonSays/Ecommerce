@@ -1,7 +1,6 @@
 package pannelli;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.Box;
@@ -10,10 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
-import prodotto.HandleProduct;
-import prodotto.tabella.ModelloProdotto;
 import prodotto.tabella.TabellaProdotto;
 import carrello.HandleCarrello;
+import carrello.tabella.ModelloCarrello;
 
 /**
  * @author simone
@@ -102,7 +100,7 @@ public class Carrello extends DefaultPanel {
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
 		//prec.setMaximumSize(new Dimension(32, 32));
-		prec.addActionListener(this);
+		eliminaProd.addActionListener(this);
 		
 		toolBar.add(prec);
 		toolBar.addSeparator();
@@ -111,10 +109,10 @@ public class Carrello extends DefaultPanel {
 		toolBar.add(Box.createHorizontalGlue());
 		toolBar.add(acquista);
 		
-		//tabProd = new TabellaProdotto(new ModelloProdotto());
+		tabProd = new TabellaProdotto(new ModelloCarrello());
 		
 		add(toolBar, BorderLayout.PAGE_START);
-		//add(tabProd, BorderLayout.CENTER);
+		add(tabProd, BorderLayout.CENTER);
 
 	}
 	
@@ -124,7 +122,7 @@ public class Carrello extends DefaultPanel {
 	@Override
 	public void onEnter() {
 		
-		//tabProd.refresh();
+		tabProd.refresh();
 	}
 	
 	/**
@@ -138,16 +136,24 @@ public class Carrello extends DefaultPanel {
 			HandlePanel.switchPanel(UserPanel.TAG);
 			
 		}else if(e.getSource().equals(acquista)){
-			HandlePanel.switchPanel(Acquista.TAG);
+			if(HandleCarrello.getCarrelloCount() == 0){
+				JOptionPane.showMessageDialog(this,"Per poter effettuare un pagamento devi prima mettere dei prodotti nel carrello\n Altrimenti effettua una donazione a www.cavanasimone.it",
+						"Selezionare i prodotti da acquistare",JOptionPane.INFORMATION_MESSAGE);
+			}else{
+				HandlePanel.switchPanel(Acquista.TAG);
+			}
 			
 		}else if(e.getSource().equals(svuotaCarrello)){
-			HandleCarrello.svuota();
-			
+			int res = JOptionPane.showConfirmDialog(this, "Vuoi svuotare il carrello?", "Svuotare?", JOptionPane.YES_NO_OPTION);
+			if(res == JOptionPane.YES_OPTION){
+				HandleCarrello.svuota();
+				tabProd.refresh();
+			}
 		}else if(e.getSource().equals(eliminaProd)){
 			if(tabProd.getSelectedRow() != -1){
 				int res = JOptionPane.showConfirmDialog(this, "Vuoi eliminare questo prodotto dal carrello?", "Cancellare?", JOptionPane.YES_NO_OPTION);
 				if(res == JOptionPane.YES_OPTION){
-					HandleCarrello.rimuoviProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
+					HandleCarrello.rimuoviProd(HandleCarrello.getProduct(tabProd.getSelectedRow()));
 					tabProd.refresh();
 				}
 			}else{

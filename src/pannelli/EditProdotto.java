@@ -88,7 +88,7 @@ public class EditProdotto extends CreaProdotto {
 		if(e.getActionCommand().equals("Conferma")){
 			
 			if(codT.getText().isEmpty() || nomeT.getText().isEmpty() || marcaT.getText().isEmpty() ||
-			   catT.getText().isEmpty() || prezzoT.getText().isEmpty()){
+			   catT.getText().isEmpty() || prezzoT.getText().isEmpty() || (sconto.isSelected() && scontoT.getText().isEmpty())){
 				JOptionPane.showMessageDialog(this, "Controlla di aver immesso i dati correttamente",
 					   "Non possono essere presenti campi vuoti",JOptionPane.WARNING_MESSAGE);
 			}else{

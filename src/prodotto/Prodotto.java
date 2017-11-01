@@ -2,8 +2,6 @@ package prodotto;
 
 import java.io.Serializable;
 
-import user.Utente;
-
 public class Prodotto implements Serializable{
 
 	private int id;
@@ -13,6 +11,9 @@ public class Prodotto implements Serializable{
 	private float prezzo;
 	private String photoPath;
 	
+	/**
+	 * @brief costruttore
+	 */
 	public Prodotto(int id, String nome, String marca, String categoria, float prezzo, String photoPath){
 		super();
 		this.id = id;
@@ -126,14 +127,6 @@ public class Prodotto implements Serializable{
 	}
 	
 	/**
-	 * @brief Ritorna il totale dell'acquisto di n prodotti
-	 * @return Totale acquisto
-	 */
-	public float getTotal(int n){
-		return prezzo * n;
-	}
-	
-	/**
 	 * @brief redifinizione del metodo toString per la stampa di un oggetto di
 	 * tipo Prodotto.
 	 */
@@ -147,6 +140,7 @@ public class Prodotto implements Serializable{
 	 * @brief redifinizione del metodo equals per confrontare un elemento con
 	 * un elemento del Vector.
 	 */
+	@Override
 	public boolean equals(Object o){
 		if(o == null || !getClass().equals(o.getClass())) return false;
 		if(o == this) return true;
@@ -160,5 +154,30 @@ public class Prodotto implements Serializable{
 		return false;
 		
 	}
-
+	
+	/**
+	 * @brief getter dello sconto di un prodotto
+	 * il metodo è presente per compatibilità nel caso di up-casting ma ritorna sempre 0
+	 */
+	public int getSconto(){
+		return 0;
+	}
+	
+	/**
+	 * @brief setter dello sconto di un prodotto
+	 * il metodo è presente per compatibilità nel caso di up-casting ma non implementato
+	 */
+	public void setSconto(int s){
+		
+	}
+	
+	/**
+	 * @brief Ritorna il totale dell'acquisto di n prodotti
+	 * @return Totale acquisto
+	 */
+	public float getTotal(int n){
+		return prezzo * n;
+	}
+	
+	
 }

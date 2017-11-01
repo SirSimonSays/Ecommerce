@@ -4,15 +4,18 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.util.Locale.Category;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import prodotto.Prod3x2;
+import prodotto.ProdSconto;
 import prodotto.Prodotto;
 
 public class CreaProdotto extends DefaultPanel{
@@ -23,9 +26,12 @@ public class CreaProdotto extends DefaultPanel{
 	 */
 	public static final String TAG = "creaP";
 	
-	private JLabel codL, nomeL, marcaL, catL, prezzoL, fotoL;
-	protected JTextField codT, nomeT, marcaT, catT, prezzoT;
+	private JLabel codL, nomeL, marcaL, catL, prezzoL, fotoL, scontoL;
+	protected JTextField codT, nomeT, marcaT, catT, prezzoT, scontoT;
 	private JButton okButton, cancelButton;
+	protected JRadioButton sconto, nosconto;
+	private JRadioButton treXdue;
+	private ButtonGroup bg1;
 	
 	/**
 	 * @brief costruttore
@@ -85,26 +91,29 @@ public class CreaProdotto extends DefaultPanel{
 		fotoL = new JLabel("Foto: ");
 		/*widget in cui inserire la foto*/
 		
+		scontoL = new JLabel("Sconto: ");
+		scontoT = new JTextField(15);
+		scontoT.setEnabled(false);
+		
+		nosconto = new JRadioButton("Prezzo completo");
+		nosconto.addActionListener(this);
+	
+		sconto = new JRadioButton("Sconto");
+		sconto.addActionListener(this);
+		
+		treXdue = new JRadioButton("3x2");
+		treXdue.addActionListener(this);
+		
+		bg1 = new ButtonGroup();
+		bg1.add(nosconto);
+		bg1.add(sconto);
+		bg1.add(treXdue);
+		
 		okButton = new JButton("Conferma");
 		okButton.addActionListener(this);
 		
 		cancelButton = new JButton("Annulla");
 		cancelButton.addActionListener(this);
-		
-		add(codL);
-		add(codT);
-		add(nomeL);
-		add(nomeT);
-		add(marcaL);
-		add(marcaT);
-		add(catL);
-		add(catT);
-		add(prezzoL);
-		add(prezzoT);
-		add(fotoL);
-		//add(fotoT);
-		add(okButton);
-		add(cancelButton);
 		
 		/**
 		 * Posizionamento dei widget all'interno del layout gl.
@@ -119,6 +128,8 @@ public class CreaProdotto extends DefaultPanel{
 							.addComponent(catL)
 							.addComponent(prezzoL)
 							.addComponent(fotoL)
+							.addComponent(nosconto)
+							.addComponent(scontoL)
 							)
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -128,6 +139,11 @@ public class CreaProdotto extends DefaultPanel{
 							.addComponent(catT)
 							.addComponent(prezzoT)
 							//.addComponent(fotoT)
+							.addGroup(gl.createSequentialGroup()
+									.addComponent(sconto)
+									.addComponent(treXdue)
+									)
+							.addComponent(scontoT)
 							.addGroup(gl.createSequentialGroup()
 									.addComponent(okButton)
 									.addComponent(cancelButton)
@@ -168,6 +184,17 @@ public class CreaProdotto extends DefaultPanel{
 							)
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(nosconto)
+							.addComponent(sconto)
+							.addComponent(treXdue)
+							)
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(scontoL)
+							.addComponent(scontoT)
+							)
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(okButton)
 							.addComponent(cancelButton)
 							)
@@ -176,25 +203,47 @@ public class CreaProdotto extends DefaultPanel{
 	}
 	
 	/**
+	 * @brief metodo chiamato in automatico all'apertura della schermata
+	 */
+	@Override
+	public void onEnter(){
+		nosconto.setSelected(true);
+		scontoT.setEnabled(false);
+	}
+	
+	/**
 	 * @param e
 	 * Metodo che gestisce gli eventi a seguito della pressione dei bottoni.
 	 * Nel caso if vengono analizzati i dati e inseriti nel file "prodFile.txt"
 	 * mentre nell'else viene annullata la procedura di immissione e chiusa la
-	 * finestra di creazione. Infine vengono puliti i JtextField in modo che
-	 * siano vuoti alla prossima apertura della finestra di creazione.
+	 * finestra di creazione.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e){
 		super.actionPerformed(e);
 		if(e.getActionCommand().equals("Conferma")){
 			
+			Prodotto p;
+			
 			if(codT.getText().isEmpty() || nomeT.getText().isEmpty() || marcaT.getText().isEmpty() ||
-			   catT.getText().isEmpty() || prezzoT.getText().isEmpty()){
+			   catT.getText().isEmpty() || prezzoT.getText().isEmpty() || (sconto.isSelected() && scontoT.getText().isEmpty())){
 				JOptionPane.showMessageDialog(this, "Controlla di aver immesso i dati correttamente",
 					   "Non possono essere presenti campi vuoti",JOptionPane.WARNING_MESSAGE);
 			}else{
-				if(prodotto.HandleProduct.aggiungiProdotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),
-				   catT.getText(), Float.parseFloat(prezzoT.getText()), "ciao")){
+				if(nosconto.isSelected()){
+					p = new Prodotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
+							Float.parseFloat(prezzoT.getText()), "ciao");
+				}
+				else if(sconto.isSelected()){
+					p = new ProdSconto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
+							Float.parseFloat(prezzoT.getText()), "ciao", Integer.parseInt(scontoT.getText()));
+				}
+				else{
+					p = new Prod3x2(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
+							Float.parseFloat(prezzoT.getText()), "ciao");
+				}
+				
+				if(prodotto.HandleProduct.aggiungiProdotto(p)){
 					JOptionPane.showMessageDialog(this, "Prodotto inserito correttamente",
 							   "Operazione andata a buon fine",JOptionPane.INFORMATION_MESSAGE);
 					HandlePanel.switchPanel(AdminPanel.TAG);
@@ -203,6 +252,10 @@ public class CreaProdotto extends DefaultPanel{
 							   "Errore",JOptionPane.ERROR_MESSAGE);
 				}
 			}
+		}else if(e.getSource().equals(nosconto) || e.getSource().equals(treXdue)){
+			scontoT.setEnabled(false);
+		}else if(e.getSource().equals(sconto)){
+			scontoT.setEnabled(true);
 		}else if(e.getActionCommand().equals("Annulla")){
 			HandlePanel.switchPanel(AdminPanel.TAG);
 		}
@@ -210,6 +263,8 @@ public class CreaProdotto extends DefaultPanel{
 
 	/**
 	 * @brief metodo chiamato in automatico alla chiusura della schermata
+	 * vengono puliti i JtextField in modo che siano vuoti alla prossima
+	 * apertura della finestra.
 	 */
 	public void onExit(){
 		codT.setText("");
@@ -217,6 +272,7 @@ public class CreaProdotto extends DefaultPanel{
 		marcaT.setText("");
 		catT.setText("");
 		prezzoT.setText("");
+		scontoT.setText("");
 	}
 
 	
