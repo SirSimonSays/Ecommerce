@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
@@ -24,6 +25,12 @@ public class Carrello extends DefaultPanel {
 	 * Tag univoco utilizzato per identificare questa schermata
 	 */
 	public static final String TAG = "carrello";
+	
+	/**
+	 * @var totL
+	 * Label contenente il prezzo totale dei prodtti nel carrello
+	 */
+	protected JLabel totL;
 	
 	/**
 	 * @var prec
@@ -67,8 +74,13 @@ public class Carrello extends DefaultPanel {
 		BorderLayout bLayout = new BorderLayout();
 		setLayout(bLayout);
 
-		JToolBar toolBar = new JToolBar();
-		toolBar.setFloatable(false);
+		JToolBar toolBarH = new JToolBar();
+		toolBarH.setFloatable(false);
+		
+		JToolBar toolBarF = new JToolBar();
+		toolBarF.setFloatable(false);
+		
+		totL = new JLabel("0.00");
 		
 		try{
 			prec = new JButton(new ImageIcon(Carrello.class.getResource("/image/prev.png")));
@@ -102,26 +114,44 @@ public class Carrello extends DefaultPanel {
 		//prec.setMaximumSize(new Dimension(32, 32));
 		eliminaProd.addActionListener(this);
 		
-		toolBar.add(prec);
-		toolBar.addSeparator();
-		toolBar.add(svuotaCarrello);
-		toolBar.add(eliminaProd);
-		toolBar.add(Box.createHorizontalGlue());
-		toolBar.add(acquista);
+		toolBarH.add(prec);
+		toolBarH.addSeparator();
+		toolBarH.add(svuotaCarrello);
+		toolBarH.add(eliminaProd);
+		toolBarH.add(Box.createHorizontalGlue());
+		toolBarH.add(acquista);
+		
+		toolBarF.add(Box.createHorizontalGlue());
+		toolBarF.add(new JLabel("Totale: € "));
+		toolBarF.add(totL);
 		
 		tabProd = new TabellaProdotto(new ModelloCarrello());
 		
-		add(toolBar, BorderLayout.PAGE_START);
+		add(toolBarH, BorderLayout.PAGE_START);
 		add(tabProd, BorderLayout.CENTER);
+		add(toolBarF, BorderLayout.PAGE_END);
 
 	}
 	
 	/**
-	 * @brief All'ingresso della schermata ricarica i prodotti
+	 * @brief calcola il totale dei prezzi e lo stampa nella Label del totale
+	 */
+	public void loadTotal(){
+		float t = 0;
+		
+		for(int i = 0; i < HandleCarrello.getCarrelloCount(); i++){
+			t += HandleCarrello.getProduct(i).getPrezzo();
+		}
+		
+		totL.setText(Float.toString(t));
+	}
+	
+	/**
+	 * @brief All'ingresso della schermata ricarica i prodotti e calcola il totale
 	 */
 	@Override
-	public void onEnter() {
-		
+	public void onEnter(){
+		loadTotal();
 		tabProd.refresh();
 	}
 	
@@ -141,6 +171,7 @@ public class Carrello extends DefaultPanel {
 						"Selezionare i prodotti da acquistare",JOptionPane.INFORMATION_MESSAGE);
 			}else{
 				HandlePanel.switchPanel(Acquista.TAG);
+				loadTotal();
 			}
 			
 		}else if(e.getSource().equals(svuotaCarrello)){
@@ -148,6 +179,7 @@ public class Carrello extends DefaultPanel {
 			if(res == JOptionPane.YES_OPTION){
 				HandleCarrello.svuota();
 				tabProd.refresh();
+				loadTotal();
 			}
 		}else if(e.getSource().equals(eliminaProd)){
 			if(tabProd.getSelectedRow() != -1){
@@ -155,6 +187,7 @@ public class Carrello extends DefaultPanel {
 				if(res == JOptionPane.YES_OPTION){
 					HandleCarrello.rimuoviProd(HandleCarrello.getProduct(tabProd.getSelectedRow()));
 					tabProd.refresh();
+					loadTotal();
 				}
 			}else{
 				JOptionPane.showMessageDialog(this,"Per poter eliminare un prodotto devi prima selezionarlo.",

@@ -206,6 +206,10 @@ public class HandleProduct {
 	public static boolean modificaProdotto(int index, Prodotto p){
 		boolean editState = false;
 		
+		//controllo blando per verificare che il prodotto non sia presente
+		if(prodotti.contains(p))
+			return editState;
+		
 		prodotti.set(index, p);
 		
 		editState = scriviProdotti();

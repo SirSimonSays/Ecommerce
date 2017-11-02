@@ -40,6 +40,21 @@ public class HandleCarrello {
 	}
 	
 	/**
+	 * @brief
+	 * @return
+	 */
+	public boolean checkProduct(){
+		
+		for(int i = 0; i < getCarrelloCount(); i++){
+			
+			//controllo di quanti prodotti dello stesso tipo sono presenti nel carrello
+			//per settare la quantità
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * @brief aggiungere il prodotto passato come parametro al Vector carrello
 	 * @param p
 	 */
