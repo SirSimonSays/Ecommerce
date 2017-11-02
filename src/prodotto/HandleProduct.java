@@ -139,12 +139,16 @@ public class HandleProduct {
 	}
 	
 	/**
-	 * @brief serve a controllare il tipo di prodotto contenuto all'index 
+	 * @brief serve a controllare il tipo di prodotto contenuto all'index.
+	 * Inoltre toglie i primi 14 caratteri in modo da avere solo il nome della
+	 * classe e non anche quello del package.
+	 * String iniziale = "class prodotto.Prodotto"
+	 * String finale   = "Prodotto"
 	 * @param index
 	 * @return la classe dell'elemento all'indice passato come parametro
 	 */
 	public static String getProductClass(int index){
-		return prodotti.elementAt(index).getClass().toString();
+		return prodotti.elementAt(index).getClass().toString().substring(15);
 	}
 	
 	/**
@@ -199,14 +203,10 @@ public class HandleProduct {
 	 * metodo per modificare un prodotto all'interno del file.
 	 * @return stato dell'operazione
 	 */
-	public static boolean modificaProdotto(int index, String n, String m, String c, float pr, String pp){
+	public static boolean modificaProdotto(int index, Prodotto p){
 		boolean editState = false;
 		
-		prodotti.elementAt(index).setNome(n);
-		prodotti.elementAt(index).setMarca(m);
-		prodotti.elementAt(index).setCategoria(c);
-		prodotti.elementAt(index).setPrezzo(pr);
-		prodotti.elementAt(index).setPhotoPath(pp);
+		prodotti.set(index, p);
 		
 		editState = scriviProdotti();
 		

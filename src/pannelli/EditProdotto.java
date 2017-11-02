@@ -19,9 +19,15 @@ public class EditProdotto extends CreaProdotto {
 	
 	/**
 	 * @var index
-	 * serve a tenere in memoria l'indice del prodotto passato come parametro
+	 * serve a memorizzare l'indice del prodotto passato come parametro
 	 */
 	private static int index = -1;
+	
+	/**
+	 * @var pType
+	 * serve a memorizzare la calsse del prodotto da modificare. Ad es. Prod3x2
+	 */
+	private static String pType;
 	
 	/**
 	 * costruttore vuoto perchè è uguale al CreaProdotto e cambiano solo
@@ -71,18 +77,20 @@ public class EditProdotto extends CreaProdotto {
 			prezzoT.setText(Float.toString(p.getPrezzo()));
 			//fotoT.setPhotoPath(p.getphotoPath);
 			
-			String c = HandleProduct.getProductClass(index);
-			switch(c){
-			case "prodotto.Prodotto":
-				nosconto.setSelected(true);
-			case "prodotto.Prod3x2":
-				treXdue.setSelected(true);
-			case "prodotto.ProdSconto":
-				sconto.setSelected(true);
-				scontoT.setText(Integer.toString(p.getSconto()));
-		}
-			
-			
+			pType = HandleProduct.getProductClass(index);
+			switch(pType){
+				case "Prodotto":
+					nosconto.setSelected(true);
+					break;
+				case "Prod3x2":
+					treXdue.setSelected(true);
+					break;
+				case "ProdSconto":
+					sconto.setSelected(true);
+					scontoT.setEnabled(true);
+					scontoT.setText(Integer.toString(p.getSconto()));
+					break;
+			}
 		}else{
 			System.out.println("errore nell'passaggio dell'indice");
 		}
@@ -92,9 +100,9 @@ public class EditProdotto extends CreaProdotto {
 	/**
 	 * @param e
 	 * Metodo che gestisce gli eventi a seguito della pressione dei bottoni.
-	 * Nel caso if vengono analizzati i dati e modificato il prodotto passato 
-	 * come parametro e riscritto nel file "prodFile.txt" mentre nell'else viene
-	 * annullata la procedura di immissione e chiusa la finestra di creazione.
+	 * Viene richiamato il metodo del padre (super) perchè viene modificato
+	 * solamente il caso in cui venga premuto "Conferma". L'unica differenza
+	 * con il metodo del padre (CreaProdotto) è la chiamata del metodo a HandleProduct.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e){
@@ -106,8 +114,22 @@ public class EditProdotto extends CreaProdotto {
 				JOptionPane.showMessageDialog(this, "Controlla di aver immesso i dati correttamente",
 					   "Non possono essere presenti campi vuoti",JOptionPane.WARNING_MESSAGE);
 			}else{
-				if(prodotto.HandleProduct.modificaProdotto(index, nomeT.getText(), marcaT.getText(),
-				   catT.getText(), Float.parseFloat(prezzoT.getText()), "ciao")){
+				
+				//controlla il tipo di prodotto e in base al radioButton cambia la classe, poi rimuove il vecchio
+				//prodotto e inserisce quello nuovo nella sua posizione altrimenti rimane come prima.
+				Prodotto p = null;
+				
+				if(nosconto.isSelected())
+					p = new Prodotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
+							Float.parseFloat(prezzoT.getText()), "ciao");
+				else if(sconto.isSelected())
+					p = new ProdSconto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
+							Float.parseFloat(prezzoT.getText()), "ciao", Integer.parseInt(scontoT.getText()));
+				else if(treXdue.isSelected())
+					p = new Prod3x2(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
+							Float.parseFloat(prezzoT.getText()), "ciao");
+				
+				if(prodotto.HandleProduct.modificaProdotto(index, p)){
 					JOptionPane.showMessageDialog(this, "Prodotto modificato correttamente",
 							   "Operazione andata a buon fine",JOptionPane.INFORMATION_MESSAGE);
 					HandlePanel.switchPanel(AdminPanel.TAG);
@@ -115,11 +137,17 @@ public class EditProdotto extends CreaProdotto {
 					JOptionPane.showMessageDialog(this, "I dati immessi non sono corretti",
 							   "Errore",JOptionPane.ERROR_MESSAGE);
 				}
+				
+				
 			}
-			
+		}else if(e.getSource().equals(nosconto) || e.getSource().equals(treXdue)){
+			scontoT.setEnabled(false);
+		}else if(e.getSource().equals(sconto)){
+			scontoT.setEnabled(true);
 		}else if(e.getActionCommand().equals("Annulla")){
 			HandlePanel.switchPanel(AdminPanel.TAG);
 		}
+		
 	}
 	
 }

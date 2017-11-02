@@ -222,25 +222,23 @@ public class CreaProdotto extends DefaultPanel{
 		super.actionPerformed(e);
 		if(e.getActionCommand().equals("Conferma")){
 			
-			Prodotto p;
-			
 			if(codT.getText().isEmpty() || nomeT.getText().isEmpty() || marcaT.getText().isEmpty() ||
 			   catT.getText().isEmpty() || prezzoT.getText().isEmpty() || (sconto.isSelected() && scontoT.getText().isEmpty())){
 				JOptionPane.showMessageDialog(this, "Controlla di aver immesso i dati correttamente",
 					   "Non possono essere presenti campi vuoti",JOptionPane.WARNING_MESSAGE);
 			}else{
-				if(nosconto.isSelected()){
+				
+				Prodotto p;
+				
+				if(nosconto.isSelected())
 					p = new Prodotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
 							Float.parseFloat(prezzoT.getText()), "ciao");
-				}
-				else if(sconto.isSelected()){
+				else if(sconto.isSelected())
 					p = new ProdSconto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
 							Float.parseFloat(prezzoT.getText()), "ciao", Integer.parseInt(scontoT.getText()));
-				}
-				else{
+				else
 					p = new Prod3x2(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
 							Float.parseFloat(prezzoT.getText()), "ciao");
-				}
 				
 				if(prodotto.HandleProduct.aggiungiProdotto(p)){
 					JOptionPane.showMessageDialog(this, "Prodotto inserito correttamente",
@@ -273,6 +271,5 @@ public class CreaProdotto extends DefaultPanel{
 		prezzoT.setText("");
 		scontoT.setText("");
 	}
-
 	
 }
