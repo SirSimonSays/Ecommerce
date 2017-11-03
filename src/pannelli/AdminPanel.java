@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
@@ -38,6 +41,12 @@ public class AdminPanel extends DefaultPanel{
 	 * bottone per eliminare un prodotto.
 	 */
 	private JButton delete;
+	
+	/**
+	 * @var changeFile
+	 * bottone per cambiare il file di default su cui salvare e caricare i prodotti
+	 */
+	private JButton changeFile;
 	
 	/**
 	 * @var tabProd
@@ -81,9 +90,20 @@ public class AdminPanel extends DefaultPanel{
 		}
 		delete.addActionListener(this);
 		
+		try{
+			changeFile = new JButton(new ImageIcon(AdminPanel.class.getResource("/image/file.png")));
+		}catch(Exception e){
+			System.out.println("impossibile trovare l'immagine " + e);
+		}
+		changeFile.addActionListener(this);
+		
+		toolBar.addSeparator();
 		toolBar.add(edit);
 		toolBar.add(add);
 		toolBar.add(delete);
+		toolBar.add(Box.createHorizontalGlue());
+		toolBar.add(changeFile);
+		toolBar.addSeparator();
 		
 		tabProd = new TabellaProdotto(new ModelloProdotto());
 		//modifica la dimensione delle righe della tabella
@@ -131,6 +151,20 @@ public class AdminPanel extends DefaultPanel{
 				JOptionPane.showMessageDialog(this,"Per poter eliminare un prodotto devi prima selezionarlo.",
 						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
 			}
+		}else if(e.getSource().equals(changeFile)){
+			
+			JFileChooser fc = new JFileChooser();
+			int returnVal = fc.showOpenDialog(new JFrame());
+						
+			if(returnVal == JFileChooser.APPROVE_OPTION){
+				HandleProduct.setFileP(fc.getSelectedFile());
+				tabProd.refresh();
+			}else{
+				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",
+						"Errore nella selezione del file",JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			
 		}
 	}
 

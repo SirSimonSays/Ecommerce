@@ -1,5 +1,13 @@
 package prodotto.tabella;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.AbstractTableModel;
 
 import prodotto.HandleProduct;
@@ -121,14 +129,34 @@ public class ModelloProdotto extends AbstractTableModel{
 					return "€ " + String.format("%.2f", p.getPrezzo());
 				
 				case IMG_COL:
-					//caricare l'immagine se il path è settato altrimenti niente
+					
+//					FIRST METHOD using JLabel class
+//					JLabel imgLabel;
+//					InputStream imageStream = this.getClass().getResourceAsStream(p.getphotoPath());
+//					BufferedImage img;
+//					try {
+//						img = ImageIO.read(imageStream);
+//						imgLabel = new JLabel(new ImageIcon(img));
+//						return imgLabel;
+//					} catch (IOException e1) {
+//						// TODO Auto-generated catch block
+//						System.out.println(p.getphotoPath() + " impossibile trovare l'immagine\n" + e1);
+//					}
+					
+//					SECOND METHOD using BufferedImage class
+//					BufferedImage img = null;
+//					try{
+//					    img = ImageIO.read(new File(p.getphotoPath()));
+//					    return img;
+//					}catch(IOException e){
+//						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);
+//					}						
 					return null;
 				
 				case OFFER_COL:
 					if(p instanceof Prod3x2){
 						return "3x2";
-					}
-					else if(p.getSconto() > 0){
+					}else if(p.getSconto() > 0){
 						return Integer.toString(p.getSconto()) + "%";
 					}
 					return "";

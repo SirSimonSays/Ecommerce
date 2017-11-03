@@ -37,6 +37,17 @@ public class HandleProduct {
 	}
 	
 	/**
+	 * @brief metodo per dare la possibilità all'utente di scegliere su
+	 * quale file salvare e da cui caricare i prodotti.
+	 */
+	public static void setFileP(File f){
+		
+		fileProdotto = f;
+		leggiProdotti();
+		
+	}
+	
+	/**
 	 * @brief metodo per aprire il file "prodFile.txt". 
 	 * @return stato dell'apertura
 	 */

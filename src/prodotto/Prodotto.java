@@ -20,8 +20,8 @@ public class Prodotto implements Serializable{
 		this.nome = nome;
 		this.marca = marca;
 		this.setCategoria(categoria);
-		this.prezzo = prezzo;
-		this.photoPath = photoPath;
+		this.setPrezzo(prezzo);
+		this.setPhotoPath(photoPath);
 	}
 	
 	/**
@@ -122,7 +122,7 @@ public class Prodotto implements Serializable{
 	 */
 	public void setPhotoPath(String photoPath) {
 		if (photoPath == null || photoPath.equals(""))
-			//setti all'immagine di default che dice che non è stata caricata alcuna immagine
+			photoPath = "/image/default.png";
 		this.photoPath = photoPath;
 	}
 	

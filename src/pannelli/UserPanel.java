@@ -79,7 +79,7 @@ public class UserPanel extends DefaultPanel{
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		//trova.setMaximumSize(new Dimension(32, 32));
+		trova.setMaximumSize(new Dimension(24, 24));
 		trova.addActionListener(this);
 		
 		try{
@@ -98,12 +98,15 @@ public class UserPanel extends DefaultPanel{
 		//addCarrello.setMaximumSize(new Dimension(32, 32));
 		addCarrello.addActionListener(this);
 		
+		toolBar.addSeparator();
 		toolBar.add(addCarrello);
+		toolBar.addSeparator();
 		toolBar.add(ricerca);
 		toolBar.add(trova);
 		toolBar.addSeparator();
 		toolBar.add(Box.createHorizontalGlue());
 		toolBar.add(carrello);
+		toolBar.addSeparator();
 		
 		tabProd = new TabellaProdotto(new ModelloProdotto());
 		
@@ -137,7 +140,8 @@ public class UserPanel extends DefaultPanel{
 			}
 		}else if(e.getSource().equals(trova)){
 			int index = HandleProduct.saerchName(ricerca.getText());
-			System.out.println(index);
+			//vuoatare la tabella e selezionare solo quelli con quel nome
+			
 		}else if(e.getSource().equals(carrello)){
 			HandlePanel.switchPanel(Carrello.TAG);
 		}

@@ -121,13 +121,13 @@ public class EditProdotto extends CreaProdotto {
 				
 				if(nosconto.isSelected())
 					p = new Prodotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
-							Float.parseFloat(prezzoT.getText()), "ciao");
+							Float.parseFloat(prezzoT.getText()), "");
 				else if(sconto.isSelected())
 					p = new ProdSconto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
-							Float.parseFloat(prezzoT.getText()), "ciao", Integer.parseInt(scontoT.getText()));
+							Float.parseFloat(prezzoT.getText()), "", Integer.parseInt(scontoT.getText()));
 				else if(treXdue.isSelected())
 					p = new Prod3x2(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
-							Float.parseFloat(prezzoT.getText()), "ciao");
+							Float.parseFloat(prezzoT.getText()), "");
 				
 				if(prodotto.HandleProduct.modificaProdotto(index, p)){
 					JOptionPane.showMessageDialog(this, "Prodotto modificato correttamente",
