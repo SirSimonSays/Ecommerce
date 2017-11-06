@@ -14,6 +14,12 @@ import prodotto.HandleProduct;
 import prodotto.Prod3x2;
 import prodotto.Prodotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il modello della tabella presente nei pannelli
+ * user e admin che serve appunto a visualizzare in formato tabellare i prodotti
+ * e tutti i loro attributi.
+ */
 public class ModelloProdotto extends AbstractTableModel{
 	
 	/**
@@ -150,7 +156,8 @@ public class ModelloProdotto extends AbstractTableModel{
 //					    return img;
 //					}catch(IOException e){
 //						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);
-//					}						
+//					}
+					
 					return null;
 				
 				case OFFER_COL:

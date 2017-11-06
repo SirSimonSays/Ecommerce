@@ -4,13 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -21,6 +16,12 @@ import javax.swing.JTextField;
 
 import user.HandleUser;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello per la creazione di un
+ * nuovo utente, offre quindi la possibilità di inserire username
+ * e password e scegliere poi di che tipo creare il nuovo utente. 
+ */
 public class CreaUtente extends DefaultPanel{
 
 	/**
@@ -29,10 +30,34 @@ public class CreaUtente extends DefaultPanel{
 	 */
 	public static final String TAG = "creaU";
 
+	/**
+	 * label per indicare all'utente cosa inserire dentro alle TextField.
+	 */
 	private JLabel nameLabel, pswLabel;
+	
+	/**
+	 * @var nameTxt
+	 * TextField che da la possibilità all'utente di inserire lo username.
+	 */
 	private JTextField nameTxt;
+	
+	/**
+	 * @var pswTxt
+	 * PasswordField che da la possibilità all'utente di inserire la password
+	 * non in chiaro come dovrebbe succedere in un sito/applicazione professionale. 
+	 */
 	private JPasswordField pswTxt;
+	
+	/**
+	 * @var checkIsAdmin 
+	 * checkBox per selezionare il tipo di classe del nuovo utente da creare.
+	 */
 	private JCheckBox checkIsAdmin;
+	
+	/**
+	 * bottoni che danno la possibilità all'utente di confermare o annullare
+	 * la creazione dell'utente.
+	 */
 	private JButton okButton, cancelButton;
 	
 	/**
@@ -83,13 +108,6 @@ public class CreaUtente extends DefaultPanel{
 		
 		cancelButton = new JButton("Annulla");
 		cancelButton.addActionListener(this);
-		
-		add(nameLabel);
-		add(nameTxt);
-		add(pswLabel);
-		add(pswTxt);
-		add(okButton);
-		add(cancelButton);
 		
 		/**
 		 * Posizionamento dei widget all'interno del layout gl.

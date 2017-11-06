@@ -4,8 +4,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa la tabella che ospita i modelli
+ * prodotto e carrello. 
+ */
 public class TabellaProdotto extends JScrollPane{
 
 	/**
@@ -19,7 +23,7 @@ public class TabellaProdotto extends JScrollPane{
 	private JTable t;
 	
 	/**
-	 * Costruttore.
+	 * Costruttore che setta i principali parametri della tabella.
 	 */
 	public TabellaProdotto(ModelloProdotto m){
 		

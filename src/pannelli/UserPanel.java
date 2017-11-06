@@ -17,6 +17,12 @@ import prodotto.HandleProduct;
 import prodotto.tabella.ModelloProdotto;
 import prodotto.tabella.TabellaProdotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello per l'utente nel quale può
+ * visualizzare i prodotti e cercare fra di essi in base ad alcune caratteristiche.
+ * Inoltre può scegliere se mettere nel carrello dei prodotti per poi acquistarli.
+ */
 public class UserPanel extends DefaultPanel{
 	
 	/**
@@ -87,7 +93,6 @@ public class UserPanel extends DefaultPanel{
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		//carrello.setMaximumSize(new Dimension(32, 32));
 		carrello.addActionListener(this);
 		
 		try{
@@ -95,7 +100,6 @@ public class UserPanel extends DefaultPanel{
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		//addCarrello.setMaximumSize(new Dimension(32, 32));
 		addCarrello.addActionListener(this);
 		
 		toolBar.addSeparator();
@@ -133,13 +137,16 @@ public class UserPanel extends DefaultPanel{
 		super.actionPerformed(e);
 		if(e.getSource().equals(addCarrello)){
 			if(tabProd.getSelectedRow() != -1){
+				
+				//gestione della quantità
 				HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
+				
 			}else{
 				JOptionPane.showMessageDialog(this,"Per poter aggiungere un prodotto devi prima selezionarlo.",
 						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}else if(e.getSource().equals(trova)){
-			int index = HandleProduct.saerchName(ricerca.getText());
+			//HandleProduct.saerchName(ricerca.getText());
 			//vuoatare la tabella e selezionare solo quelli con quel nome
 			
 		}else if(e.getSource().equals(carrello)){

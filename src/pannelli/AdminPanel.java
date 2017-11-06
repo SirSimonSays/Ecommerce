@@ -1,7 +1,6 @@
 package pannelli;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.Box;
@@ -16,6 +15,11 @@ import prodotto.HandleProduct;
 import prodotto.tabella.ModelloProdotto;
 import prodotto.tabella.TabellaProdotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello per l'admin il quale
+ * deve poter gestire i prodotti e visualizzarli. 
+ */
 public class AdminPanel extends DefaultPanel{
 	
 	/**
@@ -155,7 +159,7 @@ public class AdminPanel extends DefaultPanel{
 			
 			JFileChooser fc = new JFileChooser();
 			int returnVal = fc.showOpenDialog(new JFrame());
-						
+			
 			if(returnVal == JFileChooser.APPROVE_OPTION){
 				HandleProduct.setFileP(fc.getSelectedFile());
 				tabProd.refresh();

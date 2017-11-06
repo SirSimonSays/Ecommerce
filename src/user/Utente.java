@@ -3,11 +3,10 @@ package user;
 import java.io.Serializable;
 
 /**
- * Classe astratta che rappresenta un utente, sia admin che user semplice in base
- * al parametro @isAdmin
  * @author Simone Cavana
+ * classe astratta che rappresenta un utente, sia admin che user semplice in base
+ * al parametro @isAdmin.
  */
-
 public abstract class Utente implements Serializable{
 	
 	/**

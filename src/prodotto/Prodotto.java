@@ -2,6 +2,11 @@ package prodotto;
 
 import java.io.Serializable;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il Prodotto che poi si suddivide in altre due 
+ * sottoclassi {@link ProdSconto} e {@link Prod3x2}.
+ */
 public class Prodotto implements Serializable{
 
 	private int id;

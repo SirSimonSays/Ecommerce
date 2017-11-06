@@ -11,6 +11,12 @@ import pannelli.AdminPanel;
 import pannelli.HandlePanel;
 import pannelli.UserPanel;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il manipolatore degli utenti. Al
+ * suo interno vediamo la gestione dell'array degli utenti e l'IO
+ * su file per salvare tutti gli utenti e caricarli.
+ */
 public class HandleUser{
 	
 	/**

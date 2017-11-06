@@ -17,6 +17,12 @@ import javax.swing.JTextField;
 
 import carrello.HandleCarrello;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello per acquistare i prodotti inseriti
+ * precedentemente nel carrello, da quindi una scelta sulla carta da utilizzare 
+ * per il pagamento e la richiesta di inserimento di alcuni dati personali. 
+ */
 public class Acquista extends DefaultPanel{
 	
 	/**
@@ -25,15 +31,44 @@ public class Acquista extends DefaultPanel{
 	 */
 	public static final String TAG = "acquista";
 
+	/**
+	 * @var cardsString
+	 * array di stringhe contenente i tipi di carte da inserire nel comboBox
+	 */
 	private String[] cardsString = {"Visa", "Mastercard", "AmericanExpress"};
 	
+	/**
+	 * variabili che rappresentano le componenti del pannello, 
+	 * le Label sono le scritte che indicano all'utente cosa inserire 
+	 * dentro le TextField. Dalle Textfield vengono ricavati i dati
+	 * per creare i nuovi prodotti.
+	 */
 	private JLabel nomeL, cognL, cartaL, indL;
 	private JTextField nomeT, cognT, indT;
-	private JRadioButton card, paypal;
+	
+	/**
+	 * gruppo di radioButton composto da due Radio per selezionare il tipo
+	 * di carta con cui andare a pagare.
+	 */
 	private ButtonGroup bg;
+	private JRadioButton card, paypal;
+	
+	/**
+	 * componente grafico detto "menu a tendina" per la visualizzazione
+	 * dei tipi di carte elencati nell'array cardsString.
+	 */
 	private JComboBox<String> cards;
+	
+	/**
+	 * bottoni che danno la possibilità all'utente di confermare o annullare
+	 * la creazione del prodotto.
+	 */
 	private JButton okButton, cancelButton;
 	
+	/**
+	 * costruttore che setta tutti i componenti della finetra.
+	 * @param handlePanel
+	 */
 	public Acquista(HandlePanel handlePanel) {
 		super(handlePanel);
 		// TODO Auto-generated constructor stub
@@ -83,20 +118,6 @@ public class Acquista extends DefaultPanel{
 		
 		cancelButton = new JButton("Annulla");
 		cancelButton.addActionListener(this);
-
-		add(nomeL);
-		add(nomeT);
-		add(cognL);
-		add(cognT);
-		add(cartaL);
-		add(indL);
-		add(indT);
-		add(card);
-		add(paypal);
-		add(cards);
-		add(okButton);
-		add(cancelButton);
-		
 		
 		/**
 		 * Posizionamento dei widget all'interno del layout gl.

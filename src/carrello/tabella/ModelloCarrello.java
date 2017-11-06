@@ -4,11 +4,16 @@ import javax.swing.table.AbstractTableModel;
 
 import carrello.HandleCarrello;
 
-import prodotto.HandleProduct;
 import prodotto.Prod3x2;
 import prodotto.Prodotto;
 import prodotto.tabella.ModelloProdotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il modello della tabella presente nel 
+ * pannello carrello, del tutto simile a quella presente negli altri 
+ * pannelli ma prende i dati dall'array di carrello. 
+ */
 public class ModelloCarrello extends ModelloProdotto{
 
 	/**

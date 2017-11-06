@@ -1,5 +1,10 @@
 package prodotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il prodotto in sconto, sottoclasse
+ * di {@link Prodotto}.
+ */
 public class ProdSconto extends Prodotto{
 
 	/**

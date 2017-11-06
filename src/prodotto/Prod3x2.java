@@ -1,5 +1,10 @@
 package prodotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa la sottoclasse di Prodotto relativa
+ * all'offerta tre per due. 
+ */
 public class Prod3x2 extends Prodotto{
 	
 	/**

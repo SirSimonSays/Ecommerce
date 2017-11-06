@@ -2,13 +2,25 @@ package pannelli;
 
 import java.awt.event.ActionEvent;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import prodotto.HandleProduct;
 import prodotto.Prod3x2;
 import prodotto.ProdSconto;
 import prodotto.Prodotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello per modificare un prodotto
+ * già esistente. Prende i dati in ingresso dal prodotto selezionato e
+ * li visualizza nelle TextField in modo che l'admin possa modificarne
+ * i dati.
+ */
 public class EditProdotto extends CreaProdotto {
 
 	/**
@@ -75,7 +87,7 @@ public class EditProdotto extends CreaProdotto {
 			marcaT.setText(p.getMarca());
 			catT.setText(p.getCategoria());
 			prezzoT.setText(Float.toString(p.getPrezzo()));
-			//fotoT.setPhotoPath(p.getphotoPath);
+			imageButton.setText(p.getphotoPath());
 			
 			pType = HandleProduct.getProductClass(index);
 			switch(pType){
@@ -121,13 +133,13 @@ public class EditProdotto extends CreaProdotto {
 				
 				if(nosconto.isSelected())
 					p = new Prodotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
-							Float.parseFloat(prezzoT.getText()), "");
+							Float.parseFloat(prezzoT.getText()), imageP);
 				else if(sconto.isSelected())
 					p = new ProdSconto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
-							Float.parseFloat(prezzoT.getText()), "", Integer.parseInt(scontoT.getText()));
+							Float.parseFloat(prezzoT.getText()), imageP, Integer.parseInt(scontoT.getText()));
 				else if(treXdue.isSelected())
 					p = new Prod3x2(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
-							Float.parseFloat(prezzoT.getText()), "");
+							Float.parseFloat(prezzoT.getText()), imageP);
 				
 				if(prodotto.HandleProduct.modificaProdotto(index, p)){
 					JOptionPane.showMessageDialog(this, "Prodotto modificato correttamente",
@@ -142,8 +154,23 @@ public class EditProdotto extends CreaProdotto {
 			}
 		}else if(e.getSource().equals(nosconto) || e.getSource().equals(treXdue)){
 			scontoT.setEnabled(false);
+		
 		}else if(e.getSource().equals(sconto)){
 			scontoT.setEnabled(true);
+		
+		}else if(e.getSource().equals(imageButton)){
+			JFileChooser fc = new JFileChooser();
+			FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+			fc.setFileFilter(imageFilter);
+			int returnVal = fc.showOpenDialog(new JFrame());
+						
+			if(returnVal == JFileChooser.APPROVE_OPTION){
+				imageP = fc.getSelectedFile().toString();
+				
+			}else{
+				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",
+						"Errore nella selezione dell'immagine",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}else if(e.getActionCommand().equals("Annulla")){
 			HandlePanel.switchPanel(AdminPanel.TAG);
 		}

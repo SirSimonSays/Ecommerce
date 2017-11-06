@@ -15,8 +15,9 @@ import carrello.HandleCarrello;
 import carrello.tabella.ModelloCarrello;
 
 /**
- * @author simone
- *
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello Carrello che contiene gli oggetti da acquistare
+ * e ne fa il totale dei prezzi.
  */
 public class Carrello extends DefaultPanel {
 	
@@ -87,7 +88,6 @@ public class Carrello extends DefaultPanel {
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		//prec.setMaximumSize(new Dimension(32, 32));
 		prec.addActionListener(this);
 		
 		try{
@@ -95,7 +95,6 @@ public class Carrello extends DefaultPanel {
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		//acquista.setMaximumSize(new Dimension(32, 32));
 		acquista.addActionListener(this);
 		
 		try{
@@ -103,7 +102,6 @@ public class Carrello extends DefaultPanel {
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		//svuotaCarrello.setMaximumSize(new Dimension(32, 32));
 		svuotaCarrello.addActionListener(this);
 		
 		try{
@@ -111,7 +109,6 @@ public class Carrello extends DefaultPanel {
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
-		//prec.setMaximumSize(new Dimension(32, 32));
 		eliminaProd.addActionListener(this);
 		
 		toolBarH.add(prec);
@@ -167,7 +164,7 @@ public class Carrello extends DefaultPanel {
 			
 		}else if(e.getSource().equals(acquista)){
 			if(HandleCarrello.getCarrelloCount() == 0){
-				JOptionPane.showMessageDialog(this,"Per poter effettuare un pagamento devi prima mettere dei prodotti nel carrello\n Altrimenti effettua una donazione a www.cavanasimone.it",
+				JOptionPane.showMessageDialog(this,"Per poter effettuare un pagamento devi prima mettere dei prodotti nel carrello\n Altrimenti effettua una donazione a www.cavanaSimone.it",
 						"Selezionare i prodotti da acquistare",JOptionPane.INFORMATION_MESSAGE);
 			}else{
 				HandlePanel.switchPanel(Acquista.TAG);

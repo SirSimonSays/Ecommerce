@@ -4,6 +4,11 @@ import java.util.Vector;
 
 import prodotto.Prodotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il manipolatore del Carrello che gestisce
+ * gli articoli scelti dal cliente e da la possibilità di procedere all'acquisto. 
+ */
 public class HandleCarrello {
 	
 	/**
@@ -40,6 +45,7 @@ public class HandleCarrello {
 	}
 	
 	/**
+	 * raggruppare gli stessi prodotti in uno unico e inizializzare la quantità
 	 * @brief
 	 * @return
 	 */

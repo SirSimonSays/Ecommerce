@@ -2,8 +2,8 @@ import pannelli.HandlePanel;
 import pannelli.LoginPanel;
 
 /**
- * Classe main
- * @author Simone Cavana
+ * @brief Classe main
+ * @author Simone Cavana Cavana
  */
 
 public class Main {

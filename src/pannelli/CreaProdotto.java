@@ -5,19 +5,30 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import prodotto.Prod3x2;
 import prodotto.ProdSconto;
 import prodotto.Prodotto;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello per la creazione di un
+ * nuovo prodotto, offre quindi la possibilità di inserire tutti i dati
+ * relativi a un prodotto e darne la conferma.
+ */
 public class CreaProdotto extends DefaultPanel{
 	
 	/**
@@ -26,11 +37,46 @@ public class CreaProdotto extends DefaultPanel{
 	 */
 	public static final String TAG = "creaP";
 	
+	/**
+	 * variabili che rappresentano le componenti del pannello, 
+	 * le Label sono le scritte che indicano all'utente cosa inserire 
+	 * dentro le TextField. Dalle Textfield vengono ricavati i dati
+	 * per creare i nuovi prodotti. Queste ultime sono dichiarate 
+	 * protected in quanto vengono utilizzati i loro metodi anche dentro 
+	 * alla classe {@link EditProdotto}
+	 */
 	private JLabel codL, nomeL, marcaL, catL, prezzoL, fotoL, scontoL;
 	protected JTextField codT, nomeT, marcaT, catT, prezzoT, scontoT;
-	private JButton okButton, cancelButton;
-	protected JRadioButton sconto, nosconto, treXdue;
+
+	/**
+	 * @var imageP
+	 * stringa utilizzata per salvare il path dell'immagine selezionata
+	 * nel JFileChooser, dichiarata protected perchè utilizzata anche
+	 * nella classe {@link EditProdotto}.
+	 */
+	protected String imageP = null;
+	
+	/**
+	 * gruppo di radioButton composto da tre Radio per selezionare il tipo
+	 * di classe in cui andare a istanziare il nuovo prodotto.
+	 * I tre radioButton sono protected in quanto vengono utilizzati anche
+	 * nella classe {@link EditProdotto}.
+	 */
 	private ButtonGroup bg1;
+	protected JRadioButton sconto, nosconto, treXdue;
+	
+	/**
+	 * bottoni che danno la possibilità all'utente di confermare o annullare
+	 * la creazione del prodotto.
+	 */
+	private JButton okButton, cancelButton;
+	
+	/**
+	 * @var imageButton
+	 * bottone per la creazione di un JFileChooser per selezionare l'immagine 
+	 * dal pc dell'utente. Variabile protected perchè utilizzata in {@link EditProdotto}
+	 */
+	protected JButton imageButton;
 	
 	/**
 	 * @brief costruttore
@@ -88,7 +134,6 @@ public class CreaProdotto extends DefaultPanel{
 		prezzoT.setEditable(true);
 		
 		fotoL = new JLabel("Foto: ");
-		/*widget in cui inserire la foto*/
 		
 		scontoL = new JLabel("Sconto: ");
 		scontoT = new JTextField(15);
@@ -114,6 +159,9 @@ public class CreaProdotto extends DefaultPanel{
 		cancelButton = new JButton("Annulla");
 		cancelButton.addActionListener(this);
 		
+		imageButton = new JButton("Premere qui per selezionare l'immagine");
+		imageButton.addActionListener(this);
+		
 		/**
 		 * Posizionamento dei widget all'interno del layout gl.
 		 */
@@ -127,7 +175,10 @@ public class CreaProdotto extends DefaultPanel{
 							.addComponent(catL)
 							.addComponent(prezzoL)
 							.addComponent(fotoL)
-							.addComponent(nosconto)
+							.addGroup(gl.createSequentialGroup()
+									.addGap(20)
+									//inserimento di uno spazio per dare più leggibilità alla gui
+									) 
 							.addComponent(scontoL)
 							)
 					.addGroup(
@@ -137,8 +188,13 @@ public class CreaProdotto extends DefaultPanel{
 							.addComponent(marcaT)
 							.addComponent(catT)
 							.addComponent(prezzoT)
-							//.addComponent(fotoT)
+							.addComponent(imageButton)
 							.addGroup(gl.createSequentialGroup()
+									.addGap(20)
+									//inserimento di uno spazio per dare più leggibilità alla gui
+									)
+							.addGroup(gl.createSequentialGroup()
+									.addComponent(nosconto)
 									.addComponent(sconto)
 									.addComponent(treXdue)
 									)
@@ -179,7 +235,12 @@ public class CreaProdotto extends DefaultPanel{
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(fotoL)
-							//.addComponent(fotoT)
+							.addComponent(imageButton)
+							)
+					.addGroup(
+							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addGap(20)
+							//inserimento di uno spazio per dare più leggibilità alla gui
 							)
 					.addGroup(
 							gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -232,13 +293,13 @@ public class CreaProdotto extends DefaultPanel{
 				
 				if(nosconto.isSelected())
 					p = new Prodotto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
-							Float.parseFloat(prezzoT.getText()), "");
+							Float.parseFloat(prezzoT.getText()), imageP);
 				else if(sconto.isSelected())
 					p = new ProdSconto(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
-							Float.parseFloat(prezzoT.getText()), "", Integer.parseInt(scontoT.getText()));
+							Float.parseFloat(prezzoT.getText()), imageP, Integer.parseInt(scontoT.getText()));
 				else
 					p = new Prod3x2(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(),catT.getText(),
-							Float.parseFloat(prezzoT.getText()), "");
+							Float.parseFloat(prezzoT.getText()), imageP);
 				
 				if(prodotto.HandleProduct.aggiungiProdotto(p)){
 					JOptionPane.showMessageDialog(this, "Prodotto inserito correttamente",
@@ -253,6 +314,19 @@ public class CreaProdotto extends DefaultPanel{
 			scontoT.setEnabled(false);
 		}else if(e.getSource().equals(sconto)){
 			scontoT.setEnabled(true);
+		}else if(e.getSource().equals(imageButton)){
+			JFileChooser fc = new JFileChooser();
+			FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+			fc.setFileFilter(imageFilter);
+			int returnVal = fc.showOpenDialog(new JFrame());
+						
+			if(returnVal == JFileChooser.APPROVE_OPTION){
+				imageP = fc.getSelectedFile().toString();
+				
+			}else{
+				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",
+						"Errore nella selezione dell'immagine",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}else if(e.getActionCommand().equals("Annulla")){
 			HandlePanel.switchPanel(AdminPanel.TAG);
 		}

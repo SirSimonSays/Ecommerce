@@ -5,6 +5,11 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello che gestisce tutti i pannelli e a
+ * seconda del bisogno cambi da un pannello ad un altro. 
+ */
 public class HandlePanel extends JFrame{
 
 	/**
@@ -32,7 +37,7 @@ public class HandlePanel extends JFrame{
 		add(container);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setSize(1000, 600);
+		setSize(600, 600);
 		setMinimumSize(new Dimension(400, 300));
 		setTitle("ECommerce");
 		setLocationRelativeTo(null);

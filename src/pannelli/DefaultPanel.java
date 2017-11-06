@@ -6,7 +6,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello di default dal quale tutti i pannelli del progetto
+ * estendo direttamente o indirettamente. Crea la barra in alto composta da un solo "menu a tendina" 
+ * chiamato "File" che offre la possibilità di effettuare il logout da ogni schermata e di uscire
+ * dal programma.  
+ */
 public abstract class DefaultPanel extends JPanel implements ActionListener{
 	
 	/**

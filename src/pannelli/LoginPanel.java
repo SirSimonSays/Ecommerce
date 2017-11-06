@@ -1,7 +1,6 @@
 package pannelli;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -12,8 +11,12 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import user.*;
-
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il pannello per effettuare il login iniziale
+ * al programma. Da questa schermata se non si hanno delle credenziali si può
+ * uscire oppure creare un nuovo utente.
+ */
 public class LoginPanel extends DefaultPanel{
 	
 	/**
@@ -22,9 +25,29 @@ public class LoginPanel extends DefaultPanel{
 	 */
 	public static final String TAG = "login";
 	
+	/**
+	 * label per indicare all'utente cosa inserire dentro alle TextField. 
+	 * @var imgLabel immagazzina un'icona per abbellire la gui.
+	 */
 	private JLabel nameLabel, pswLabel, imgLabel;
+	
+	/**
+	 * @var nameTxt
+	 * TextField che da la possibilità all'utente di inserire lo username.
+	 */
 	private JTextField nameTxt;
+	
+	/**
+	 * @var pswTxt
+	 * PasswordField che da la possibilità all'utente di inserire la password
+	 * non in chiaro come dovrebbe succedere in un sito/applicazione professionale. 
+	 */
 	private JPasswordField pswTxt;
+	
+	/**
+	 * bottoni che danno la possibilità all'utente di confermare oppure di creare
+	 * un nuovo utente tramite il pannello {@link CreaUtente}.
+	 */
 	private JButton okButton, gearButton;
 	
 	/**
@@ -106,14 +129,6 @@ public class LoginPanel extends DefaultPanel{
 		
 		gearButton.setSize(250, 350);
 		gearButton.addActionListener(this);
-		
-		add(nameLabel);
-		add(nameTxt);
-		add(pswLabel);
-		add(pswTxt);
-		add(okButton);
-		add(gearButton);
-		add(imgLabel);
 		
 		/**
 		 * Posizionamento dei widget all'interno del layout gl.

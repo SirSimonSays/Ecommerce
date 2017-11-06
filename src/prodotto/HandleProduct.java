@@ -7,11 +7,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
 
+/**
+ * @author Simone Cavana
+ * @brief classe che implementa il gestore dei prodotti al cui interno gestisce 
+ * l'IO da file dell'array dei prodotti modificato nella gui dall'admin.
+ */
 public class HandleProduct {
 	
 	/**
 	 * @var nomeFileProdotto
-	 * costante contente path assoluto del file dei prodotti.
+	 * costante contente path assoluto del file dei prodotti di default.
 	 */
 	private static final String nomeFileProdotto = "src/prodotto/prodFile.txt";
 	
@@ -23,7 +28,7 @@ public class HandleProduct {
 	
 	/**
 	 * @var prodotti
-	 * Vettore che contiene le istanze di tutti i prodotti
+	 * Vettore che contiene le istanze di tutti i prodotti.
 	 */	
 	private static Vector<Prodotto> prodotti = new Vector<Prodotto>();
 	
@@ -38,17 +43,21 @@ public class HandleProduct {
 	
 	/**
 	 * @brief metodo per dare la possibilità all'utente di scegliere su
-	 * quale file salvare e da cui caricare i prodotti.
+	 * quale file salvare e da cui caricare i prodotti momentaneamente,
+	 * perchè al prossimo avvio del programma verrà di nuovo scelto il
+	 * file di default che si trova a nomeFileProdotto.
+	 * @param f
 	 */
 	public static void setFileP(File f){
 		
 		fileProdotto = f;
+		prodotti.removeAllElements();
 		leggiProdotti();
 		
 	}
 	
 	/**
-	 * @brief metodo per aprire il file "prodFile.txt". 
+	 * @brief metodo per controllare che il file @var fileProdotto esista. 
 	 * @return stato dell'apertura
 	 */
 	public static boolean apriFileP(){
@@ -68,7 +77,7 @@ public class HandleProduct {
 	/**
 	 * @brief lettura dei prodotti da file
 	 * metodo per leggere i prodotti dal file e inserirli in un array di
-	 * Prodotti, dopo che è stato aperto il file in modo corretto.
+	 * prodotti, dopo che è stato controllata l'esistenza del file.
 	 * @return stato della lettura
 	 */
 	public static boolean leggiProdotti(){
@@ -94,7 +103,7 @@ public class HandleProduct {
 	
 	/**
 	 * @brief scrittura dei prodotti su file
-	 * metodo per scrivere l'array prodotti sul file prodFile.txt
+	 * metodo per scrivere l'array @var prodotti sul file @var fileProdotto.
 	 * @return stato della scrittura
 	 */
 	public static boolean scriviProdotti(){
@@ -164,12 +173,7 @@ public class HandleProduct {
 	
 	/**
 	 * @brief scrittura sul file di un nuovo prodotto
-	 * @param i id prodotto
-	 * @param n nome prodotto
-	 * @param m marca prodotto
-	 * @param c categoria prodotto
-	 * @param pr prezzo prodotto
-	 * @param pp percorso della foto del prodotto
+	 * @param p
 	 * metodo per l'inserimento di un nuovo prodotto all'interno del file. Non
 	 * viene effettuato alcun controllo sull'esistenza del file in modo che
 	 * se non disponibile venga creato.
@@ -195,7 +199,9 @@ public class HandleProduct {
 	
 	/**
 	 * @brief rimozione di un prodotto
-	 * metodo per la rimozione prodotto all'interno del file.
+	 * @param index
+	 * metodo per la rimozione prodotto all'interno del file all'indice
+	 * @var index dell'array.
 	 * @return stato dell'operazione
 	 */
 	public static boolean rimuoviProdotto(int index){
@@ -211,7 +217,10 @@ public class HandleProduct {
 	
 	/**
 	 * @brief modifica di un prodotto
-	 * metodo per modificare un prodotto all'interno del file.
+	 * @param index
+	 * @param p
+	 * metodo per modificare un prodotto all'interno del file all'indice
+	 * @var index dell'array.
 	 * @return stato dell'operazione
 	 */
 	public static boolean modificaProdotto(int index, Prodotto p){
@@ -231,13 +240,21 @@ public class HandleProduct {
 	/**
 	 * @brief ricerca veloce di un prodotto in base al nome
 	 * @param text
-	 * @return l'indice della riga dell'elemento cercato altrimenti -1
+	 * @return il vettore degli elementi che corrispondono altimenti null
 	 */
-	public static int saerchName(String text) {
+	public static Vector<Prodotto> saerchName(String text) {
+		/**
+		 * @var sp
+		 * vettore contenente gli elementi che soddisfano la ricerca sul nome.
+		 */
+		Vector<Prodotto> sp = new Vector<Prodotto>();
+		sp = null;
+		
 		for(int i = 0; i < prodotti.size(); i++){
 			if(prodotti.elementAt(i).getNome().toLowerCase().equals(text.toLowerCase()))
-				return i;
+				sp.addElement((prodotti.elementAt(i)));
 		}
-		return -1;
+		
+		return sp;
 	}
 }
