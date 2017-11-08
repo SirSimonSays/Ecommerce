@@ -7,9 +7,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.SpinnerNumberModel;
 
 import carrello.HandleCarrello;
 
@@ -62,6 +65,12 @@ public class UserPanel extends DefaultPanel{
 	private JButton addCarrello;
 	
 	/**
+	 * @var nProd
+	 * spinner per selezionare quanti prodotti mettere nel carrello.
+	 */
+	private JSpinner nProd;
+	
+	/**
 	 * @brief costruttore
 	 * @param handlePanel
 	 * Costruttore che definisce e setta tutti gli oggetti della finestra.
@@ -73,8 +82,11 @@ public class UserPanel extends DefaultPanel{
 		BorderLayout bLayout = new BorderLayout();
 		setLayout(bLayout);
 
-		JToolBar toolBar = new JToolBar();
-		toolBar.setFloatable(false);
+		JToolBar toolBarH = new JToolBar();
+		toolBarH.setFloatable(false);
+		
+		JToolBar toolBarF = new JToolBar();
+		toolBarF.setFloatable(false);
 		
 		ricerca = new JTextField(15);
 		ricerca.setMaximumSize(new Dimension(24, 24));
@@ -102,20 +114,30 @@ public class UserPanel extends DefaultPanel{
 		}
 		addCarrello.addActionListener(this);
 		
-		toolBar.addSeparator();
-		toolBar.add(addCarrello);
-		toolBar.addSeparator();
-		toolBar.add(ricerca);
-		toolBar.add(trova);
-		toolBar.addSeparator();
-		toolBar.add(Box.createHorizontalGlue());
-		toolBar.add(carrello);
-		toolBar.addSeparator();
+		toolBarH.addSeparator();
+		toolBarH.add(addCarrello);
+		toolBarH.addSeparator();
+		toolBarH.add(ricerca);
+		toolBarH.add(trova);
+		toolBarH.addSeparator();
+		toolBarH.add(Box.createHorizontalGlue());
+		toolBarH.add(carrello);
+		toolBarH.addSeparator();
+
+		SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 100, 1);
+		nProd = new JSpinner(model);
+		
+		toolBarF.add(Box.createHorizontalGlue());
+		toolBarF.add(new JLabel("Quantità: "));
+		toolBarF.add(nProd);
+		toolBarF.add(Box.createHorizontalGlue());
+		//toolBarF.setVisible(false);
 		
 		tabProd = new TabellaProdotto(new ModelloProdotto());
 		
-		add(toolBar, BorderLayout.PAGE_START);		
+		add(toolBarH, BorderLayout.PAGE_START);
 		add(tabProd, BorderLayout.CENTER);
+		add(toolBarF, BorderLayout.PAGE_END);
 		
 	}
 	
@@ -125,6 +147,7 @@ public class UserPanel extends DefaultPanel{
 	@Override
 	public void onEnter() {
 		HandleProduct.leggiProdotti();
+		nProd.setValue(1);
 		tabProd.refresh();
 	}
 	
@@ -139,6 +162,7 @@ public class UserPanel extends DefaultPanel{
 			if(tabProd.getSelectedRow() != -1){
 				
 				//gestione della quantità
+				//nProd.getValue();
 				HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
 				
 			}else{
@@ -147,7 +171,7 @@ public class UserPanel extends DefaultPanel{
 			}
 		}else if(e.getSource().equals(trova)){
 			//HandleProduct.saerchName(ricerca.getText());
-			//vuoatare la tabella e selezionare solo quelli con quel nome
+			//vuotare la tabella e selezionare solo quelli con quel nome
 			
 		}else if(e.getSource().equals(carrello)){
 			HandlePanel.switchPanel(Carrello.TAG);
@@ -159,6 +183,7 @@ public class UserPanel extends DefaultPanel{
 	 */
 	public void onExit(){
 		ricerca.setText("");
+		nProd.setValue(1);
 	}
 	
 }

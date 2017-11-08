@@ -161,7 +161,9 @@ public class AdminPanel extends DefaultPanel{
 			int returnVal = fc.showOpenDialog(new JFrame());
 			
 			if(returnVal == JFileChooser.APPROVE_OPTION){
-				HandleProduct.setFileP(fc.getSelectedFile());
+				if(!HandleProduct.setFileP(fc.getSelectedFile()))
+					JOptionPane.showMessageDialog(this,"Il file selezionato è vuoto.",
+							"Info",JOptionPane.INFORMATION_MESSAGE);
 				tabProd.refresh();
 			}else{
 				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",

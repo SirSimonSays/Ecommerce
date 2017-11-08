@@ -1,8 +1,12 @@
 package prodotto;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
@@ -39,21 +43,6 @@ public class HandleProduct {
 	private HandleProduct() {
 		// TODO Auto-generated constructor stub
 	
-	}
-	
-	/**
-	 * @brief metodo per dare la possibilità all'utente di scegliere su
-	 * quale file salvare e da cui caricare i prodotti momentaneamente,
-	 * perchè al prossimo avvio del programma verrà di nuovo scelto il
-	 * file di default che si trova a nomeFileProdotto.
-	 * @param f
-	 */
-	public static void setFileP(File f){
-		
-		fileProdotto = f;
-		prodotti.removeAllElements();
-		leggiProdotti();
-		
 	}
 	
 	/**
@@ -236,7 +225,45 @@ public class HandleProduct {
 		
 		return editState;
 	}
-
+	
+	/**
+	 * @brief metodo per dare la possibilità all'utente di scegliere su
+	 * quale file salvare e da cui caricare i prodotti momentaneamente,
+	 * perchè al prossimo avvio del programma verrà di nuovo scelto il
+	 * file di default che si trova a nomeFileProdotto.
+	 * @param f
+	 * @return false se il file selezionato è vuoto, true altrimenti
+	 */
+	public static boolean setFileP(File f){
+		
+		boolean changeState = false;
+		
+		fileProdotto = f;
+		prodotti.removeAllElements();
+		
+		/**
+		 * modo per controllare se il file è vuoto, in modo che non venga generato alcun
+		 * errore in fase di lettura di un file vuoto.
+		 */
+		BufferedReader br;
+		try{
+			br = new BufferedReader(new FileReader(f.getAbsolutePath()));
+			
+			if(br.readLine() == null){
+			    System.out.println("Il file è vuoto");
+			}else{
+				changeState = leggiProdotti();
+			}
+			
+			br.close();
+		}catch(Exception e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     	
+		
+		return changeState;
+	}
+	
 	/**
 	 * @brief ricerca veloce di un prodotto in base al nome
 	 * @param text
