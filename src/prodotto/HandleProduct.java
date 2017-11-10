@@ -177,7 +177,7 @@ public class HandleProduct {
 			return addState;
 		
 		prodotti.addElement(p);
-				
+		
 		//for(int index = 0; index < prodotti.size(); index ++)
 		//	System.out.println(prodotti.elementAt(index));
 		
@@ -275,7 +275,6 @@ public class HandleProduct {
 		 * vettore contenente gli elementi che soddisfano la ricerca sul nome.
 		 */
 		Vector<Prodotto> sp = new Vector<Prodotto>();
-		sp = null;
 		
 		for(int i = 0; i < prodotti.size(); i++){
 			if(prodotti.elementAt(i).getNome().toLowerCase().equals(text.toLowerCase()))

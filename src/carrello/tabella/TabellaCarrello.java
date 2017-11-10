@@ -1,4 +1,4 @@
-package prodotto.tabella;
+package carrello.tabella;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
  * @brief classe che implementa la tabella che ospita i modelli
  * prodotto e carrello. 
  */
-public class TabellaProdotto extends JScrollPane{
+public class TabellaCarrello extends JScrollPane{
 
 	/**
 	 * Modello basato sul modello creato in ModelloProdotto.
@@ -26,7 +26,7 @@ public class TabellaProdotto extends JScrollPane{
 	 * Costruttore che setta i principali parametri della tabella per
 	 * le schermate di admin e user.
 	 */
-	public TabellaProdotto(ModelloProdotto m){
+	public TabellaCarrello(ModelloCarrello m){
 		
 		super();
 		
@@ -58,5 +58,5 @@ public class TabellaProdotto extends JScrollPane{
 	public int getSelectedRow(){
 		return t.getSelectedRow();
 	}
-	
+
 }

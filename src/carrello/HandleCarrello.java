@@ -18,6 +18,13 @@ public class HandleCarrello {
 	private static Vector<Prodotto> carrello = new Vector<Prodotto>();
 	
 	/**
+	 * @var qcarrello
+	 * Vettore che contiene la quantità del rispettivo prodotto nella stessa posizione
+	 * nel vector carrello.
+	 */
+	private static Vector<Integer> qcarrello = new Vector<Integer>();
+	
+	/**
 	 * @brief Costruttutore private per evitare la creazione di un'istanza
 	 */
 	private HandleCarrello(){
@@ -37,7 +44,7 @@ public class HandleCarrello {
 	 * @param index
 	 * @return prodotto all'indice index
 	 */
-	public static Prodotto getProduct(int index){
+	public static Prodotto getProductAt(int index){
 		if(index < carrello.size()){
 			return carrello.get(index);
 		}
@@ -45,44 +52,72 @@ public class HandleCarrello {
 	}
 	
 	/**
-	 * raggruppare gli stessi prodotti in uno unico e inizializzare la quantità
-	 * @brief
-	 * @return
+	 * @brief getter del elemento all'index 
+	 * @param index
+	 * @return intero all'indice index
 	 */
-	public boolean checkProduct(){
-		
-		for(int i = 0; i < getCarrelloCount(); i++){
-			
-			//controllo di quanti prodotti dello stesso tipo sono presenti nel carrello
-			//per settare la quantità
-		}
-		
-		return true;
+	public static Integer getQcarrelloAt(int index) {
+		return qcarrello.elementAt(index);
 	}
 	
 	/**
-	 * @brief aggiungere il prodotto passato come parametro al Vector carrello
+	 * @brief nella parte else del metodo aggiunge il prodotto passato come 
+	 * parametro al Vector carrello e la rispettiva quantità al Vector qcarrello
+	 * se il prodotto non era già esistente, mentre nella parte if incrementa
+	 * solo la quantità di quel prodotto di n in quanto l'if ci dice che il prodotto
+	 * era già presente nel carrello.
+	 * @param p
+	 * @param n
+	 */
+	public static void aggiungiProd(Prodotto p, int n){
+		if(carrello.contains(p)){
+			qcarrello.setElementAt(getQcarrelloAt(carrello.indexOf(p)) + n, carrello.indexOf(p));
+		}else{
+			carrello.addElement(p);
+			qcarrello.addElement(n);
+		}
+	}
+	
+	/**
+	 * @brief incrementa (+1) la quantità di un prodotto presente nel carrello.
 	 * @param p
 	 */
-	public static void aggiungiProd(Prodotto p){
-		System.out.println(p);
-		carrello.addElement(p);
+	public static void incrementProd(Prodotto p){
+		qcarrello.setElementAt(getQcarrelloAt(carrello.indexOf(p)) + 1, carrello.indexOf(p));
 	}
 	
 	/**
-	 * @brief eliminare il prodotto passato come parametro dal Vector carrello
+	 * @brief elimina un prodotto dal carrello e la rispettiva quantità.
 	 * @param p
 	 */
 	public static void rimuoviProd(Prodotto p){
-		System.out.println(p);
+		qcarrello.removeElementAt(carrello.indexOf(p));
 		carrello.removeElement(p);
 	}
 	
 	/**
+	 * @brief nella if controllo se la quantità del prodotto da eliminare è
+	 * più di uno e quindi la decrementa di uno, altrimenti elimina il prodotto
+	 * passato come parametro dal Vector carrello e la rispettiva quantità al
+	 * Vector qcarrello.
+	 * @param p
+	 */
+	public static void reduceProd(Prodotto p){
+		if(qcarrello.elementAt(carrello.indexOf(p)) > 1){
+			qcarrello.setElementAt(getQcarrelloAt(carrello.indexOf(p)) - 1, carrello.indexOf(p));
+		}else{
+			rimuoviProd(p);
+		}
+		
+	}
+	
+	/**
 	 * @brief eliminare tutti gli elementi presenti nel Vector carrello
+	 * e le rispettive quantità
 	 */
 	public static void svuota(){
 		carrello.removeAllElements();
+		qcarrello.removeAllElements();
 	}
 
 }

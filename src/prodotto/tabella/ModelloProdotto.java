@@ -108,6 +108,19 @@ public class ModelloProdotto extends AbstractTableModel{
 
 	/**
 	 * @brief Implementazione del metodo di {@link AbstractTableModel}
+	 * @param columnIndex Indice della colonna
+	 * @return Tipologia di classe contenuta in una specifica colonna
+	 */
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		if(columnIndex == IMG_COL){
+			return ImageIcon.class;
+		}
+		return String.class;
+	}
+	
+	/**
+	 * @brief Implementazione del metodo di {@link AbstractTableModel}
 	 * @param riga Indice della riga
 	 * @param col Indice della colonna
 	 * @return Ritorna l'oggetto contenuto in una cella della tabella
@@ -153,6 +166,7 @@ public class ModelloProdotto extends AbstractTableModel{
 //					BufferedImage img = null;
 //					try{
 //					    img = ImageIO.read(new File(p.getphotoPath()));
+//					    System.out.println("letto");
 //					    return img;
 //					}catch(IOException e){
 //						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);

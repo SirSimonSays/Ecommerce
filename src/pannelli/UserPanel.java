@@ -2,6 +2,11 @@ package pannelli;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.Box;
@@ -26,7 +31,7 @@ import prodotto.tabella.TabellaProdotto;
  * visualizzare i prodotti e cercare fra di essi in base ad alcune caratteristiche.
  * Inoltre può scegliere se mettere nel carrello dei prodotti per poi acquistarli.
  */
-public class UserPanel extends DefaultPanel{
+public class UserPanel extends DefaultPanel implements DropTargetListener{
 	
 	/**
 	 * @var TAG
@@ -92,6 +97,8 @@ public class UserPanel extends DefaultPanel{
 		ricerca.setMaximumSize(new Dimension(24, 24));
 		ricerca.setEditable(true);
 		
+		DropTarget dTarget = new DropTarget(carrello, this);
+		
 		try{
 			trova = new JButton(new ImageIcon(UserPanel.class.getResource("/image/explore.png")));
 		}catch(Exception e){
@@ -131,7 +138,6 @@ public class UserPanel extends DefaultPanel{
 		toolBarF.add(new JLabel("Quantità: "));
 		toolBarF.add(nProd);
 		toolBarF.add(Box.createHorizontalGlue());
-		//toolBarF.setVisible(false);
 		
 		tabProd = new TabellaProdotto(new ModelloProdotto());
 		
@@ -161,16 +167,14 @@ public class UserPanel extends DefaultPanel{
 		if(e.getSource().equals(addCarrello)){
 			if(tabProd.getSelectedRow() != -1){
 				
-				//gestione della quantità
-				//nProd.getValue();
-				HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()));
+				HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()), (Integer)nProd.getValue());
 				
 			}else{
 				JOptionPane.showMessageDialog(this,"Per poter aggiungere un prodotto devi prima selezionarlo.",
 						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}else if(e.getSource().equals(trova)){
-			//HandleProduct.saerchName(ricerca.getText());
+			System.out.println(HandleProduct.saerchName(ricerca.getText()));
 			//vuotare la tabella e selezionare solo quelli con quel nome
 			
 		}else if(e.getSource().equals(carrello)){
@@ -184,6 +188,38 @@ public class UserPanel extends DefaultPanel{
 	public void onExit(){
 		ricerca.setText("");
 		nProd.setValue(1);
+	}
+
+	@Override
+	public void dragEnter(DropTargetDragEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragExit(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragOver(DropTargetDragEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drop(DropTargetDropEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		//implementare per il drag'n drop
+		
+	}
+
+	@Override
+	public void dropActionChanged(DropTargetDragEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
