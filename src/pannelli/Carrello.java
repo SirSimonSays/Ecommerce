@@ -125,14 +125,14 @@ public class Carrello extends DefaultPanel {
 		eliminaProd.addActionListener(this);
 		
 		try{
-			decrementProd = new JButton(new ImageIcon(Carrello.class.getResource("/image/delete.png")));
+			decrementProd = new JButton(new ImageIcon(Carrello.class.getResource("/image/arrow_down.png")));
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
 		decrementProd.addActionListener(this);
 		
 		try{
-			incrementProd = new JButton(new ImageIcon(Carrello.class.getResource("/image/delete.png")));
+			incrementProd = new JButton(new ImageIcon(Carrello.class.getResource("/image/arrow_up.png")));
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
