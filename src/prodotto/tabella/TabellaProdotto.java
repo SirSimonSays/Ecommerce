@@ -4,6 +4,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * @author Simone Cavana
@@ -35,6 +37,7 @@ public class TabellaProdotto extends JScrollPane{
 		
 		t.setColumnSelectionAllowed(false);
 		t.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		t.setDragEnabled(true);
 		
 		t.setRowHeight(100);
 		t.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -58,5 +61,21 @@ public class TabellaProdotto extends JScrollPane{
 	public int getSelectedRow(){
 		return t.getSelectedRow();
 	}
-	
+
+	/**
+	 * @brief getter dell'attributo modello su cui la tabella si struttura 
+	 * @return il modello della tabella
+	 */
+	public AbstractTableModel getModel(){
+		return dataModel;
+	}
+
+	/**
+	 * @brief setter dell'oggetto rowSorter della tabella  
+	 * @param rowSorter
+	 */
+	public void setRSorter(TableRowSorter<TableModel> rowSorter) {
+		// TODO Auto-generated method stub
+		t.setRowSorter(rowSorter);
+	}
 }

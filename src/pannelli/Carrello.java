@@ -169,7 +169,7 @@ public class Carrello extends DefaultPanel {
 		float t = 0;
 		
 		for(int i = 0; i < HandleCarrello.getCarrelloCount(); i++){
-			t += HandleCarrello.getProductAt(i).getPrezzo() * HandleCarrello.getQcarrelloAt(i);
+			t += HandleCarrello.getProductAt(i).getTotal(HandleCarrello.getQcarrelloAt(i));
 		}
 		
 		totL.setText(Float.toString(t));

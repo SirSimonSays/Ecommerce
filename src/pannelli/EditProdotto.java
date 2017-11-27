@@ -87,7 +87,7 @@ public class EditProdotto extends CreaProdotto {
 			marcaT.setText(p.getMarca());
 			catT.setText(p.getCategoria());
 			prezzoT.setText(Float.toString(p.getPrezzo()));
-			imageButton.setText(p.getphotoPath());
+			imageButton.setText(p.getphotoPath().substring(54));
 			
 			pType = HandleProduct.getProductClass(index);
 			switch(pType){

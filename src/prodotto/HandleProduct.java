@@ -263,24 +263,4 @@ public class HandleProduct {
 		
 		return changeState;
 	}
-	
-	/**
-	 * @brief ricerca veloce di un prodotto in base al nome
-	 * @param text
-	 * @return il vettore degli elementi che corrispondono altimenti null
-	 */
-	public static Vector<Prodotto> saerchName(String text) {
-		/**
-		 * @var sp
-		 * vettore contenente gli elementi che soddisfano la ricerca sul nome.
-		 */
-		Vector<Prodotto> sp = new Vector<Prodotto>();
-		
-		for(int i = 0; i < prodotti.size(); i++){
-			if(prodotti.elementAt(i).getNome().toLowerCase().equals(text.toLowerCase()))
-				sp.addElement((prodotti.elementAt(i)));
-		}
-		
-		return sp;
-	}
 }

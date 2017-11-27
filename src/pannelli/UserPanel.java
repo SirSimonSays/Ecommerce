@@ -17,10 +17,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.RowFilter;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.table.TableModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import carrello.HandleCarrello;
-
 import prodotto.HandleProduct;
 import prodotto.tabella.ModelloProdotto;
 import prodotto.tabella.TabellaProdotto;
@@ -46,16 +50,16 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 	private TabellaProdotto tabProd;
 	
 	/**
+	 * @var rowSorter
+	 * oggetto per la ricerca all'interno della tabella 
+	 */
+	private TableRowSorter<TableModel> rowSorter;
+	
+	/**
 	 * @var ricerca
 	 * barra per l'inserimento di stringhe di ricerca.
 	 */
 	private JTextField ricerca;
-	
-	/**
-	 * @var trova
-	 * bottone per la ricerca dei prodotti.
-	 */
-	private JButton trova;
 	
 	/**
 	 * @var carrello
@@ -97,22 +101,14 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 		ricerca.setMaximumSize(new Dimension(24, 24));
 		ricerca.setEditable(true);
 		
-		DropTarget dTarget = new DropTarget(carrello, this);
-		
-		try{
-			trova = new JButton(new ImageIcon(UserPanel.class.getResource("/image/explore.png")));
-		}catch(Exception e){
-			System.out.println("impossibile trovare l'immagine " + e);
-		}
-		trova.setMaximumSize(new Dimension(24, 24));
-		trova.addActionListener(this);
-		
 		try{
 			carrello = new JButton(new ImageIcon(UserPanel.class.getResource("/image/basket.png")));
 		}catch(Exception e){
 			System.out.println("impossibile trovare l'immagine " + e);
 		}
 		carrello.addActionListener(this);
+		@SuppressWarnings("unused")
+		DropTarget dTarget = new DropTarget(carrello, this);
 		
 		try{
 			addCarrello = new JButton(new ImageIcon(UserPanel.class.getResource("/image/addbasket.png")));
@@ -125,7 +121,6 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 		toolBarH.add(addCarrello);
 		toolBarH.addSeparator();
 		toolBarH.add(ricerca);
-		toolBarH.add(trova);
 		toolBarH.addSeparator();
 		toolBarH.add(Box.createHorizontalGlue());
 		toolBarH.add(carrello);
@@ -138,13 +133,47 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 		toolBarF.add(new JLabel("Quantità: "));
 		toolBarF.add(nProd);
 		toolBarF.add(Box.createHorizontalGlue());
-		
+
 		tabProd = new TabellaProdotto(new ModelloProdotto());
+		rowSorter = new TableRowSorter<TableModel>(tabProd.getModel());
+		tabProd.setRSorter(rowSorter);
 		
 		add(toolBarH, BorderLayout.PAGE_START);
 		add(tabProd, BorderLayout.CENTER);
 		add(toolBarF, BorderLayout.PAGE_END);
 		
+		//metodo per cercare nella tabella senza l'utilizzo di un bottone
+		//credit: stackoverflow.com/questions/22066387/how-to-search-an-element-in-a-jtable-java
+		ricerca.getDocument().addDocumentListener(new DocumentListener(){
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = ricerca.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = ricerca.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        });
 	}
 	
 	/**
@@ -172,11 +201,7 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 			}else{
 				JOptionPane.showMessageDialog(this,"Per poter aggiungere un prodotto devi prima selezionarlo.",
 						"Seleziona una riga",JOptionPane.INFORMATION_MESSAGE);
-			}
-		}else if(e.getSource().equals(trova)){
-			System.out.println(HandleProduct.saerchName(ricerca.getText()));
-			//vuotare la tabella e selezionare solo quelli con quel nome
-			
+			}	
 		}else if(e.getSource().equals(carrello)){
 			HandlePanel.switchPanel(Carrello.TAG);
 		}
@@ -209,10 +234,17 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 	}
 
 	@Override
-	public void drop(DropTargetDropEvent arg0) {
+	public void drop(DropTargetDropEvent dtde) {
 		// TODO Auto-generated method stub
+        System.out.println("dropped");
 		
-		//implementare per il drag'n drop
+        try {                	
+			//Add product to the basket
+			HandleCarrello.aggiungiProd(HandleProduct.getProduct(tabProd.getSelectedRow()),(Integer)nProd.getValue());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        dtde.dropComplete(true);
 		
 	}
 
