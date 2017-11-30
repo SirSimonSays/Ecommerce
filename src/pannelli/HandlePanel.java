@@ -13,6 +13,11 @@ import javax.swing.JPanel;
 public class HandlePanel extends JFrame{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * @var container
 	 * Panello principale che gestisce i pannelli tramite un cardLayout.
 	 */

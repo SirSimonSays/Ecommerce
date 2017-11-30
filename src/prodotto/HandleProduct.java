@@ -3,10 +3,8 @@ package prodotto;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
@@ -35,7 +33,6 @@ public class HandleProduct {
 	 * Vettore che contiene le istanze di tutti i prodotti.
 	 */	
 	private static Vector<Prodotto> prodotti = new Vector<Prodotto>();
-	
 	
 	/**
 	 * @brief Costruttutore private per evitare la creazione di un'istanza
@@ -69,6 +66,7 @@ public class HandleProduct {
 	 * prodotti, dopo che è stato controllata l'esistenza del file.
 	 * @return stato della lettura
 	 */
+	@SuppressWarnings("unchecked")
 	public static boolean leggiProdotti(){
 		
 		boolean readState = false;

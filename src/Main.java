@@ -14,6 +14,7 @@ public class Main {
 	 * @brief metodo iniziale che istanzia una finestra principale e switcha al
 	 * pannello di login.
 	 */
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		

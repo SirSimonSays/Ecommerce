@@ -8,6 +8,11 @@ package prodotto;
 public class ProdSconto extends Prodotto{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * @var sconto
 	 * variabile intera fra 0 e 100 rappresentante lo sconto da
 	 * applicare su un prodotto.

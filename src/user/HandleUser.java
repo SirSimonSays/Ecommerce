@@ -67,6 +67,7 @@ public class HandleUser{
 	 * dopo che è stato aperto il file in modo corretto.
 	 * @return stato della lettura
 	 */
+	@SuppressWarnings("unchecked")
 	public static boolean leggiUtenti(){
 		
 		boolean readState = false;

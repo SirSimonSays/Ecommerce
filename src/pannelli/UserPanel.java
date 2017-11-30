@@ -38,6 +38,11 @@ import prodotto.tabella.TabellaProdotto;
 public class UserPanel extends DefaultPanel implements DropTargetListener{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @var TAG
 	 * Tag univoco utilizzato per identificare questa schermata.
 	 */
@@ -60,6 +65,12 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 	 * barra per l'inserimento di stringhe di ricerca.
 	 */
 	private JTextField ricerca;
+	
+	/**
+	 * @var lricerca
+	 * label per indicare dove cercare
+	 */
+	private JLabel lricerca;
 	
 	/**
 	 * @var carrello
@@ -97,6 +108,7 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 		JToolBar toolBarF = new JToolBar();
 		toolBarF.setFloatable(false);
 		
+		lricerca = new JLabel("Cerca: ");
 		ricerca = new JTextField(15);
 		ricerca.setMaximumSize(new Dimension(24, 24));
 		ricerca.setEditable(true);
@@ -119,7 +131,9 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 		
 		toolBarH.addSeparator();
 		toolBarH.add(addCarrello);
+		toolBarH.add(Box.createHorizontalGlue());
 		toolBarH.addSeparator();
+		toolBarH.add(lricerca);
 		toolBarH.add(ricerca);
 		toolBarH.addSeparator();
 		toolBarH.add(Box.createHorizontalGlue());
@@ -232,7 +246,11 @@ public class UserPanel extends DefaultPanel implements DropTargetListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	 * @brief metodo utilizzato per inserire prodotti nel carrello con dnd
+	 * @param dtde
+	 */
 	@Override
 	public void drop(DropTargetDropEvent dtde) {
 		// TODO Auto-generated method stub

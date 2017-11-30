@@ -23,6 +23,11 @@ import prodotto.Prodotto;
 public class ModelloProdotto extends AbstractTableModel{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @var ColName
 	 * array di stringhe nel quale ogni elemento rappresenta l'intestazioni di una colonna.
 	 */

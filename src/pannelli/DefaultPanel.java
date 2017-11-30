@@ -16,6 +16,11 @@ import javax.swing.*;
 public abstract class DefaultPanel extends JPanel implements ActionListener{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @var handlePanel
 	 * Variabile per tenere il riferimento alla classe HandlePanel per la gestione del cardLayout. 
 	 */

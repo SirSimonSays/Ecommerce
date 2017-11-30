@@ -8,6 +8,11 @@ package prodotto;
 public class Prod3x2 extends Prodotto{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @brief costruttore
 	 * @param id
 	 * @param nome

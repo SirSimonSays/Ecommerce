@@ -15,6 +15,11 @@ import javax.swing.table.TableRowSorter;
 public class TabellaProdotto extends JScrollPane{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Modello basato sul modello creato in ModelloProdotto.
 	 */
 	private AbstractTableModel dataModel;

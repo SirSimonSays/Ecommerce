@@ -8,6 +8,11 @@ package user;
 public class Admin extends Utente{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @brief costruttore 
 	 * richiama il super costruttore ma con @var isAdmin settata a true.
 	 * @param nome

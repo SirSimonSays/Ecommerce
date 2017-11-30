@@ -26,6 +26,11 @@ import carrello.HandleCarrello;
 public class Acquista extends DefaultPanel{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @var TAG
 	 * Tag univoco utilizzato per identificare questa schermata  
 	 */

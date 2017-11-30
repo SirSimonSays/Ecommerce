@@ -9,6 +9,14 @@ import java.io.Serializable;
  */
 public class Prodotto implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * attributi di un prodotto generico visualizzabili all'interno della tabella.
+	 */
 	private int id;
 	private String nome;
 	private String marca;
@@ -78,6 +86,14 @@ public class Prodotto implements Serializable{
 	}
 	
 	/**
+	 * @brief getter dello sconto di un prodotto
+	 * il metodo è presente per compatibilità nel caso di up-casting ma ritorna sempre 0
+	 */
+	public int getSconto(){
+		return 0;
+	}
+	
+	/**
 	 * @brief setter del codice univoco
 	 * @param id
 	 */
@@ -132,6 +148,14 @@ public class Prodotto implements Serializable{
 	}
 	
 	/**
+	 * @brief setter dello sconto di un prodotto
+	 * il metodo è presente per compatibilità nel caso di up-casting ma non implementato
+	 */
+	public void setSconto(int s){
+		
+	}
+	
+	/**
 	 * @brief redifinizione del metodo toString per la stampa di un oggetto di
 	 * tipo Prodotto.
 	 */
@@ -157,22 +181,6 @@ public class Prodotto implements Serializable{
 		   this.categoria.compareTo(p.categoria) == 0)
 			return true;
 		return false;
-		
-	}
-	
-	/**
-	 * @brief getter dello sconto di un prodotto
-	 * il metodo è presente per compatibilità nel caso di up-casting ma ritorna sempre 0
-	 */
-	public int getSconto(){
-		return 0;
-	}
-	
-	/**
-	 * @brief setter dello sconto di un prodotto
-	 * il metodo è presente per compatibilità nel caso di up-casting ma non implementato
-	 */
-	public void setSconto(int s){
 		
 	}
 	

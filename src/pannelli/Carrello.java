@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
-import prodotto.tabella.TabellaProdotto;
 import carrello.HandleCarrello;
 import carrello.tabella.ModelloCarrello;
 import carrello.tabella.TabellaCarrello;
@@ -22,6 +21,11 @@ import carrello.tabella.TabellaCarrello;
  */
 public class Carrello extends DefaultPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @var TAG
 	 * Tag univoco utilizzato per identificare questa schermata

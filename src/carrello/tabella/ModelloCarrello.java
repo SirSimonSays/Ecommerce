@@ -6,7 +6,6 @@ import carrello.HandleCarrello;
 
 import prodotto.Prod3x2;
 import prodotto.Prodotto;
-import prodotto.tabella.ModelloProdotto;
 
 /**
  * @author Simone Cavana
@@ -15,6 +14,11 @@ import prodotto.tabella.ModelloProdotto;
  * pannelli ma prende i dati dall'array di carrello. 
  */
 public class ModelloCarrello extends AbstractTableModel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @var ColName

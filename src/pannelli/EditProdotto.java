@@ -24,6 +24,11 @@ import prodotto.Prodotto;
 public class EditProdotto extends CreaProdotto {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @var TAG
 	 * Tag univoco utilizzato per identificare questa schermata.
 	 */

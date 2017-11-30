@@ -13,6 +13,11 @@ import javax.swing.table.AbstractTableModel;
 public class TabellaCarrello extends JScrollPane{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Modello basato sul modello creato in ModelloProdotto.
 	 */
 	private AbstractTableModel dataModel;
