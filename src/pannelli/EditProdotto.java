@@ -92,7 +92,7 @@ public class EditProdotto extends CreaProdotto {
 			marcaT.setText(p.getMarca());
 			catT.setText(p.getCategoria());
 			prezzoT.setText(Float.toString(p.getPrezzo()));
-			imageButton.setText(p.getphotoPath().substring(54));
+			imageButton.setText(p.getphotoPath());
 			
 			pType = HandleProduct.getProductClass(index);
 			switch(pType){
@@ -145,8 +145,8 @@ public class EditProdotto extends CreaProdotto {
 				else if(treXdue.isSelected())
 					p = new Prod3x2(Integer.parseInt(codT.getText()), nomeT.getText(), marcaT.getText(), catT.getText(), 
 							Float.parseFloat(prezzoT.getText()), imageP);
-				
-				if(prodotto.HandleProduct.modificaProdotto(index, p)){
+
+				if(prodotto.HandleProduct.modificaProdotto(getIndex(), p)){
 					JOptionPane.showMessageDialog(this, "Prodotto modificato correttamente",
 							   "Operazione andata a buon fine",JOptionPane.INFORMATION_MESSAGE);
 					HandlePanel.switchPanel(AdminPanel.TAG);
@@ -170,8 +170,8 @@ public class EditProdotto extends CreaProdotto {
 			int returnVal = fc.showOpenDialog(new JFrame());
 						
 			if(returnVal == JFileChooser.APPROVE_OPTION){
-				imageP = fc.getSelectedFile().getAbsolutePath();
-				
+				imageP = fc.getSelectedFile().getPath();
+				imageButton.setText(imageP);
 			}else{
 				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",
 						"Errore nella selezione dell'immagine",JOptionPane.INFORMATION_MESSAGE);

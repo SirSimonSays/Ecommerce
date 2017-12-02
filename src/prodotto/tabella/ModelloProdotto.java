@@ -171,7 +171,7 @@ public class ModelloProdotto extends AbstractTableModel{
 //					BufferedImage img = null;
 //					try{
 //					    img = ImageIO.read(new File(p.getphotoPath()));
-//					    System.out.println("letto");
+//					    System.out.println("letto" + p.getphotoPath());
 //					    return img;
 //					}catch(IOException e){
 //						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);

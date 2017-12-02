@@ -326,8 +326,7 @@ public class CreaProdotto extends DefaultPanel{
 			int returnVal = fc.showOpenDialog(new JFrame());
 						
 			if(returnVal == JFileChooser.APPROVE_OPTION){
-				imageP = fc.getSelectedFile().getAbsolutePath();
-				
+				imageP = fc.getSelectedFile().getPath();
 			}else{
 				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",
 						"Errore nella selezione dell'immagine",JOptionPane.INFORMATION_MESSAGE);

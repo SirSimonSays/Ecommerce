@@ -206,7 +206,7 @@ public class HandleProduct {
 	 * @param index
 	 * @param p
 	 * metodo per modificare un prodotto all'interno del file all'indice
-	 * @var index dell'array.
+	 * index dell'array.
 	 * @return stato dell'operazione
 	 */
 	public static boolean modificaProdotto(int index, Prodotto p){

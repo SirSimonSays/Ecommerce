@@ -32,7 +32,7 @@ public class Prodotto implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.marca = marca;
-		this.setCategoria(categoria);
+		this.categoria = categoria;
 		this.setPrezzo(prezzo);
 		this.setPhotoPath(photoPath);
 	}
@@ -143,7 +143,7 @@ public class Prodotto implements Serializable{
 	 */
 	public void setPhotoPath(String photoPath) {
 		if (photoPath == null || photoPath.equals(""))
-			photoPath = "/home/simone/Documents/UNI/Prog_ogg/progetto/Ecommerce/src/image/default.png";
+			photoPath = "/image/default.png";
 		this.photoPath = photoPath;
 	}
 	
@@ -178,7 +178,9 @@ public class Prodotto implements Serializable{
 		if(this.id == p.id && 
 		   this.nome.compareTo(p.nome) == 0 && 
 		   this.marca.compareTo(p.marca) == 0 && 
-		   this.categoria.compareTo(p.categoria) == 0)
+		   this.categoria.compareTo(p.categoria) == 0 &&
+		   this.prezzo == p.prezzo &&
+		   this.photoPath.compareTo(p.photoPath) == 0)
 			return true;
 		return false;
 		
