@@ -349,6 +349,7 @@ public class CreaProdotto extends DefaultPanel{
 		catT.setText("");
 		prezzoT.setText("");
 		scontoT.setText("");
+		imageP = "";
 	}
 	
 }

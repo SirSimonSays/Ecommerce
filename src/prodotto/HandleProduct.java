@@ -139,9 +139,8 @@ public class HandleProduct {
 	 * @return prodotto all'indice index
 	 */
 	public static Prodotto getProduct(int index){
-		if(index < prodotti.size()){
+		if(index < prodotti.size())
 			return prodotti.get(index);
-		}
 		return null;
 	}
 	
