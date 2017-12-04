@@ -1,5 +1,10 @@
 package carrello.tabella;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 
 import carrello.HandleCarrello;
@@ -107,6 +112,19 @@ public class ModelloCarrello extends AbstractTableModel{
 	
 	/**
 	 * @brief Implementazione del metodo di {@link AbstractTableModel}
+	 * @param columnIndex Indice della colonna
+	 * @return Tipologia di classe contenuta in una specifica colonna
+	 */
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		if(columnIndex == IMG_COL){
+			return ImageIcon.class;
+		}
+		return String.class;
+	}
+	
+	/**
+	 * @brief Implementazione del metodo di {@link AbstractTableModel}
 	 * @param riga Indice della riga
 	 * @param col Indice della colonna
 	 * @return Ritorna l'oggetto contenuto in una cella della tabella
@@ -134,7 +152,17 @@ public class ModelloCarrello extends AbstractTableModel{
 					return HandleCarrello.getQcarrelloAt(riga);		
 				
 				case IMG_COL:
-					//caricare l'immagine se il path è settato altrimenti niente
+					
+					BufferedImage img = null;
+					ImageIcon icon = null;
+					try{
+					    img = ImageIO.read(new File(p.getphotoPath()));
+						icon = new ImageIcon(img);
+						return icon;
+					}catch(Exception e){
+						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);
+					}
+					
 					return null;
 				
 				case OFFER_COL:

@@ -171,6 +171,8 @@ public class EditProdotto extends CreaProdotto {
 						
 			if(returnVal == JFileChooser.APPROVE_OPTION){
 				imageP = fc.getSelectedFile().getPath();
+				if(imageP.indexOf("src/") != -1)
+					imageP = imageP.substring(imageP.indexOf("src/"));
 				imageButton.setText(imageP);
 			}else{
 				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",

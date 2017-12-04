@@ -2,12 +2,9 @@ package prodotto.tabella;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.table.AbstractTableModel;
 
 import prodotto.HandleProduct;
@@ -153,29 +150,16 @@ public class ModelloProdotto extends AbstractTableModel{
 					return "€ " + String.format("%.2f", p.getPrezzo());
 				
 				case IMG_COL:
-					
-//					FIRST METHOD using JLabel class
-//					JLabel imgLabel;
-//					InputStream imageStream = this.getClass().getResourceAsStream(p.getphotoPath());
-//					BufferedImage img;
-//					try {
-//						img = ImageIO.read(imageStream);
-//						imgLabel = new JLabel(new ImageIcon(img));
-//						return imgLabel;
-//					} catch (IOException e1) {
-//						// TODO Auto-generated catch block
-//						System.out.println(p.getphotoPath() + " impossibile trovare l'immagine\n" + e1);
-//					}
-					
-//					SECOND METHOD using BufferedImage class
-//					BufferedImage img = null;
-//					try{
-//					    img = ImageIO.read(new File(p.getphotoPath()));
-//					    System.out.println("letto" + p.getphotoPath());
-//					    return img;
-//					}catch(IOException e){
-//						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);
-//					}
+
+					BufferedImage img = null;
+					ImageIcon icon = null;
+					try{
+					    img = ImageIO.read(new File(p.getphotoPath()));
+						icon = new ImageIcon(img);
+						return icon;
+					}catch(Exception e){
+						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);
+					}
 					
 					return null;
 				

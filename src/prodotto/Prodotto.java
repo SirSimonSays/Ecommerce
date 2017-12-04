@@ -143,7 +143,7 @@ public class Prodotto implements Serializable{
 	 */
 	public void setPhotoPath(String photoPath) {
 		if (photoPath == null || photoPath.equals(""))
-			photoPath = "/image/default.png";
+			photoPath = "src/image/default.png";
 		this.photoPath = photoPath;
 	}
 	
