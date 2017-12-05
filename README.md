@@ -1,8 +1,8 @@
 
 # Ecommerce
 Progetto realizzato in Java per l'esame del corso di Programmazione ad oggetti dell'università unimore.</br>
-La documentazione si trova nel file doc/html/index.html nel quale sono descritte dettagliatamente classi e metodi.</br>
-Per eseguire il progetto digitare da terminale java -jar Ecommerce.jar (tenendo conto di essere nella cartella Ecommerce).
+La documentazione si trova nel file <u>doc/html/index.html</u> nel quale sono descritte dettagliatamente classi e metodi.</br>
+Per eseguire il progetto digitare da terminale <b> java -jar Ecommerce.jar </b>(tenendo conto di essere nella cartella Ecommerce).
 
 Utenti preesistenti
 -------------------
