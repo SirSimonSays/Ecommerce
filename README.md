@@ -7,8 +7,8 @@ Per eseguire il progetto digitare da terminale <b> java -jar Ecommerce.jar </b>(
 Utenti preesistenti
 -------------------
 
-  * login: user pwd: user -> UTENTE
-  * login: root pwd: root -> ADMIN
+  * login: user    pwd: user  --->  UTENTE
+  * login: root    pwd: root  --->  ADMIN
 
 Resources
 ---------
