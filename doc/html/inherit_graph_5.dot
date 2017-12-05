@@ -3,17 +3,7 @@ digraph "Grafico della gerarchia delle classi"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="Serializable",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 [label="JFrame",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="prodotto.Prodotto",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classprodotto_1_1Prodotto.html",tooltip="classe che implementa il Prodotto che poi si suddivide in altre due sottoclassi ProdSconto e Prod3x2..."];
-  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="prodotto.Prod3x2",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classprodotto_1_1Prod3x2.html",tooltip="classe che implementa la sottoclasse di Prodotto relativa all&#39;offerta tre per due. "];
-  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="prodotto.ProdSconto",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classprodotto_1_1ProdSconto.html",tooltip="classe che implementa il prodotto in sconto, sottoclasse di Prodotto. "];
-  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="user.Utente",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classuser_1_1Utente.html"];
-  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="user.Admin",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classuser_1_1Admin.html",tooltip="classe che implementa la sottoclasse Admin relativa a Utente. "];
-  Node5 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="user.User",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classuser_1_1User.html",tooltip="classe che implementa la sottoclasse user relativa a Utente. "];
+  Node2 [label="pannelli.HandlePanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1HandlePanel.html",tooltip="classe che implementa il pannello che gestisce tutti i pannelli e a seconda del bisogno cambi da un p..."];
 }

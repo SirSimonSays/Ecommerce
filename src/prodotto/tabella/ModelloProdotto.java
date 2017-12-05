@@ -1,5 +1,6 @@
 package prodotto.tabella;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -153,9 +154,17 @@ public class ModelloProdotto extends AbstractTableModel{
 
 					BufferedImage img = null;
 					ImageIcon icon = null;
+					Image image = null;
 					try{
 					    img = ImageIO.read(new File(p.getphotoPath()));
 						icon = new ImageIcon(img);
+						
+						//RIDIMENSIONARE IMMAGINI PIU GRANDI DI 100x100
+						if(icon.getIconHeight() > 100 || icon.getIconWidth() > 100){
+							image = icon.getImage(); 
+							image = image.getScaledInstance(64, 100,  java.awt.Image.SCALE_SMOOTH);  
+							icon = new ImageIcon(image);
+						}
 						return icon;
 					}catch(Exception e){
 						System.out.println(p.getphotoPath() + " errore nella lettura dell'immagine\n" + e);

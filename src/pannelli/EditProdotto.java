@@ -92,6 +92,7 @@ public class EditProdotto extends CreaProdotto {
 			marcaT.setText(p.getMarca());
 			catT.setText(p.getCategoria());
 			prezzoT.setText(Float.toString(p.getPrezzo()));
+			imageP = p.getphotoPath();
 			imageButton.setText(p.getphotoPath());
 			
 			pType = HandleProduct.getProductClass(index);
@@ -171,8 +172,11 @@ public class EditProdotto extends CreaProdotto {
 						
 			if(returnVal == JFileChooser.APPROVE_OPTION){
 				imageP = fc.getSelectedFile().getPath();
+				
+				//utilizzato per utilizzare il path da src se presente
 				if(imageP.indexOf("src/") != -1)
 					imageP = imageP.substring(imageP.indexOf("src/"));
+				
 				imageButton.setText(imageP);
 			}else{
 				JOptionPane.showMessageDialog(this,"Non hai selezionato un file adeguato.",

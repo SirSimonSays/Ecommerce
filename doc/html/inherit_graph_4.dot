@@ -3,5 +3,27 @@ digraph "Grafico della gerarchia delle classi"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="prodotto.HandleProduct",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classprodotto_1_1HandleProduct.html",tooltip="classe che implementa il gestore dei prodotti al cui interno gestisce l&#39;IO da file dell&#39;array dei pro..."];
+  Node1 [label="ActionListener",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pannelli.DefaultPanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1DefaultPanel.html",tooltip="classe che implementa il pannello di default dal quale tutti i pannelli del progetto estendo direttam..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pannelli.Acquista",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1Acquista.html",tooltip="classe che implementa il pannello per acquistare i prodotti inseriti precedentemente nel carrello..."];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pannelli.AdminPanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1AdminPanel.html",tooltip="classe che implementa il pannello per l&#39;admin il quale deve poter gestire i prodotti e visualizzarli..."];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pannelli.Carrello",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1Carrello.html",tooltip="classe che implementa il pannello Carrello che contiene gli oggetti da acquistare e ne fa il totale d..."];
+  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pannelli.CreaProdotto",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1CreaProdotto.html",tooltip="classe che implementa il pannello per la creazione di un nuovo prodotto, offre quindi la possibilità ..."];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pannelli.EditProdotto",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1EditProdotto.html",tooltip="classe che implementa il pannello per modificare un prodotto già esistente. Prende i dati in ingresso..."];
+  Node2 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pannelli.CreaUtente",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1CreaUtente.html",tooltip="classe che implementa il pannello per la creazione di un nuovo utente, offre quindi la possibilità di..."];
+  Node2 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pannelli.LoginPanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1LoginPanel.html",tooltip="classe che implementa il pannello per effettuare il login iniziale al programma. Da questa schermata ..."];
+  Node2 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="pannelli.UserPanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpannelli_1_1UserPanel.html",tooltip="classe che implementa il pannello per l&#39;utente nel quale può visualizzare i prodotti e cercare fra di..."];
+  Node11 [label="DropTargetListener",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node11 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="JPanel",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node12 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

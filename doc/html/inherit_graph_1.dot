@@ -3,5 +3,9 @@ digraph "Grafico della gerarchia delle classi"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="Main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMain.html",tooltip="Classe main. "];
+  Node1 [label="AbstractTableModel",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="carrello.tabella.Modello\lCarrello",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcarrello_1_1tabella_1_1ModelloCarrello.html",tooltip="classe che implementa il modello della tabella presente nel pannello carrello, del tutto simile a que..."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="prodotto.tabella.Modello\lProdotto",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classprodotto_1_1tabella_1_1ModelloProdotto.html",tooltip="classe che implementa il modello della tabella presente nei pannelli user e admin che serve appunto a..."];
 }

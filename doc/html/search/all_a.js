@@ -1,14 +1,6 @@
 var searchData=
 [
-  ['pannelli',['pannelli',['../namespacepannelli.html',1,'']]],
-  ['prod3x2',['Prod3x2',['../classprodotto_1_1Prod3x2.html',1,'prodotto']]],
-  ['prod3x2',['Prod3x2',['../classprodotto_1_1Prod3x2.html#a5cd7d437468f94e4c1117e157482b178',1,'prodotto::Prod3x2']]],
-  ['prod3x2_2ejava',['Prod3x2.java',['../Prod3x2_8java.html',1,'']]],
-  ['prodfile_2etxt',['prodFile.txt',['../prodFile_8txt.html',1,'']]],
-  ['prodotto',['Prodotto',['../classprodotto_1_1Prodotto.html',1,'prodotto']]],
-  ['prodotto',['prodotto',['../namespaceprodotto.html',1,'prodotto'],['../classprodotto_1_1Prodotto.html#a1284a5a72cfd6e87908c9b12e59edccb',1,'prodotto.Prodotto.Prodotto()']]],
-  ['prodotto_2ejava',['Prodotto.java',['../Prodotto_8java.html',1,'']]],
-  ['prodsconto',['ProdSconto',['../classprodotto_1_1ProdSconto.html',1,'prodotto']]],
-  ['prodsconto',['ProdSconto',['../classprodotto_1_1ProdSconto.html#ab671dda815d6e89261382cc133a66e85',1,'prodotto::ProdSconto']]],
-  ['prodsconto_2ejava',['ProdSconto.java',['../ProdSconto_8java.html',1,'']]]
+  ['offer_5fcol',['OFFER_COL',['../classcarrello_1_1tabella_1_1ModelloCarrello.html#a7030ff9c1d0bd689f03e4989d3054bbd',1,'carrello.tabella.ModelloCarrello.OFFER_COL()'],['../classprodotto_1_1tabella_1_1ModelloProdotto.html#aa8c2016bb5dc00934be5f41ff2015e4c',1,'prodotto.tabella.ModelloProdotto.OFFER_COL()']]],
+  ['onenter',['onEnter',['../classpannelli_1_1AdminPanel.html#ab1423f6bc6277acd6ba34d7cb39898a6',1,'pannelli.AdminPanel.onEnter()'],['../classpannelli_1_1Carrello.html#a009ed65faba76c096e4bec5868359059',1,'pannelli.Carrello.onEnter()'],['../classpannelli_1_1CreaProdotto.html#a5a54b553805559a70887dc1c826ad5bd',1,'pannelli.CreaProdotto.onEnter()'],['../classpannelli_1_1DefaultPanel.html#af67b6f1bd8139d0820471e1aef95e1a5',1,'pannelli.DefaultPanel.onEnter()'],['../classpannelli_1_1EditProdotto.html#a73bd35f592d639a4f59bd4e7ff836b19',1,'pannelli.EditProdotto.onEnter()'],['../classpannelli_1_1UserPanel.html#ade40f227917639792a8f0706cfcbf5ba',1,'pannelli.UserPanel.onEnter()']]],
+  ['onexit',['onExit',['../classpannelli_1_1Acquista.html#ace6dac6f3fa396d0b09c8c1ae255bc02',1,'pannelli.Acquista.onExit()'],['../classpannelli_1_1CreaProdotto.html#a3168a0fb31fecf9e6b19e39cef168854',1,'pannelli.CreaProdotto.onExit()'],['../classpannelli_1_1CreaUtente.html#a68cc1dac6b695bafef4a23d9d8bf8540',1,'pannelli.CreaUtente.onExit()'],['../classpannelli_1_1DefaultPanel.html#afb577d01c4ba7963b88a7e8a16bf8d5b',1,'pannelli.DefaultPanel.onExit()'],['../classpannelli_1_1LoginPanel.html#a26935b36e2b286d4c9f84acd6d33cf02',1,'pannelli.LoginPanel.onExit()'],['../classpannelli_1_1UserPanel.html#a6b476cdb6648f1fac37d4f5af5276b8b',1,'pannelli.UserPanel.onExit()']]]
 ];

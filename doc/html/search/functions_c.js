@@ -11,6 +11,7 @@ var searchData=
   ['setpassword',['setPassword',['../classuser_1_1Utente.html#a987b17c8fde756838e8eb20eca1fca19',1,'user::Utente']]],
   ['setphotopath',['setPhotoPath',['../classprodotto_1_1Prodotto.html#a065d3e4166bcd924f4ac6e29804e4b76',1,'prodotto::Prodotto']]],
   ['setprezzo',['setPrezzo',['../classprodotto_1_1Prodotto.html#ab66dc790fbf5814552d1ed111c2bcf42',1,'prodotto::Prodotto']]],
+  ['setrsorter',['setRSorter',['../classprodotto_1_1tabella_1_1TabellaProdotto.html#a7cde4a13850205eacd1667bb1a7d40d7',1,'prodotto::tabella::TabellaProdotto']]],
   ['setsconto',['setSconto',['../classprodotto_1_1Prodotto.html#a874e4933584a6ec3015f35ea9f691619',1,'prodotto.Prodotto.setSconto()'],['../classprodotto_1_1ProdSconto.html#a3bea1e8303c44f121967884ecb47131d',1,'prodotto.ProdSconto.setSconto()']]],
   ['setvisible',['setVisible',['../classpannelli_1_1DefaultPanel.html#a09ec6beeef7a08bca71ff616be738707',1,'pannelli::DefaultPanel']]],
   ['svuota',['svuota',['../classcarrello_1_1HandleCarrello.html#a95ec9646a82e8ee36cd283061ff795fb',1,'carrello::HandleCarrello']]],
