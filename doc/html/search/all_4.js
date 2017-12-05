@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['getcarrellocount',['getCarrelloCount',['../classcarrello_1_1HandleCarrello.html#a975e059fec43cde9e357d10f89693ffc',1,'carrello::HandleCarrello']]],
+  ['getcategoria',['getCategoria',['../classprodotto_1_1Prodotto.html#adaeb62225d14c23ccf2a6cf45e7791f1',1,'prodotto::Prodotto']]],
+  ['getid',['getId',['../classprodotto_1_1Prodotto.html#ac71270a1d7eb96c57ca545d7fbe7bb42',1,'prodotto::Prodotto']]],
+  ['getindex',['getIndex',['../classpannelli_1_1EditProdotto.html#a8b4b168e9c90ba3f8b176099ffd083e7',1,'pannelli::EditProdotto']]],
+  ['getisadmin',['getIsAdmin',['../classuser_1_1Utente.html#a86c8eac33502154d89efa2b40370fe23',1,'user::Utente']]],
+  ['getmarca',['getMarca',['../classprodotto_1_1Prodotto.html#a73317499cdc7afbd1082aa305b58a20f',1,'prodotto::Prodotto']]],
+  ['getnome',['getNome',['../classprodotto_1_1Prodotto.html#a9e15b41809d8b0d51b5cb8cb6808090f',1,'prodotto.Prodotto.getNome()'],['../classuser_1_1Utente.html#a27c26ff06cef23199fb9b42d6b8d6a64',1,'user.Utente.getNome()']]],
+  ['getpassword',['getPassword',['../classuser_1_1Utente.html#af2c5c47398e43503db3b1f70d8974d6c',1,'user::Utente']]],
+  ['getphotopath',['getphotoPath',['../classprodotto_1_1Prodotto.html#a1bb7bb835fca2625561282601e66b869',1,'prodotto::Prodotto']]],
+  ['getprezzo',['getPrezzo',['../classprodotto_1_1Prodotto.html#a5f4d311094a705d889275ef328040163',1,'prodotto::Prodotto']]],
+  ['getproduct',['getProduct',['../classprodotto_1_1HandleProduct.html#a0ec9338996236dae4ae71bc688f7de35',1,'prodotto::HandleProduct']]],
+  ['getproductat',['getProductAt',['../classcarrello_1_1HandleCarrello.html#a2fa092192a8583461577832164a88d38',1,'carrello::HandleCarrello']]],
+  ['getproductclass',['getProductClass',['../classprodotto_1_1HandleProduct.html#a5c498e3ea94b0b04b92682fc0911ebc6',1,'prodotto::HandleProduct']]],
+  ['getproductcount',['getProductCount',['../classprodotto_1_1HandleProduct.html#a335ae91d340cb3d9e03fa8a0273c595a',1,'prodotto::HandleProduct']]],
+  ['getproductindex',['getProductIndex',['../classprodotto_1_1HandleProduct.html#aa6ce020721adcd714233d902c19b81f4',1,'prodotto::HandleProduct']]],
+  ['getqcarrelloat',['getQcarrelloAt',['../classcarrello_1_1HandleCarrello.html#a6b7d3e4e718bdfa50fa9721e032cb8c2',1,'carrello::HandleCarrello']]],
+  ['getsconto',['getSconto',['../classprodotto_1_1Prodotto.html#aefb61923bf21fe637ce51dcbd2324213',1,'prodotto.Prodotto.getSconto()'],['../classprodotto_1_1ProdSconto.html#a73adcd02f13eb13b2fcee94c9fea5260',1,'prodotto.ProdSconto.getSconto()']]],
+  ['gettotal',['getTotal',['../classprodotto_1_1Prod3x2.html#a62ae3b579250fc62cf194f086c8dc484',1,'prodotto.Prod3x2.getTotal()'],['../classprodotto_1_1Prodotto.html#af709142e76c31cffd3b2adc5295ea19b',1,'prodotto.Prodotto.getTotal()']]]
+];

@@ -1,0 +1,7 @@
+digraph "Grafico della gerarchia delle classi"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="prodotto.HandleProduct",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classprodotto_1_1HandleProduct.html",tooltip="classe che implementa il gestore dei prodotti al cui interno gestisce l&#39;IO da file dell&#39;array dei pro..."];
+}
