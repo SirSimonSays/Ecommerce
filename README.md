@@ -1,5 +1,11 @@
 # Ecommerce
-Eccomerce project in java language for university exam.
+Progetto realizzato in Java per l'esame del corso di Programmazione ad oggetti dell'università unimore.
+La documentazione si trova nel file doc/html/index.html nel quale sono descritte dettagliatamente classi e metodi.
+Per eseguire il progetto digitare da terminale java -jar Ecommerce.jar (tenendo conto di essere nella cartella Ecommerce).
+
+Utenti preesistenti:
+  login: user pwd: user -> UTENTE
+  login: root pwd: root -> ADMIN
 
 Resources:
-  https://www.iconfinder.com/
+  per le icone -> https://www.iconfinder.com/
